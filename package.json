@@ -2,9 +2,7 @@
     "private": true,
     "scripts": {
         "dev:styles": "npx tailwindcss -i resources/css/plugin.css -o resources/dist/filament-table-repeater.css --postcss --watch",
-        "dev:scripts": "esbuild resources/js/plugin.js --bundle --sourcemap=inline --outfile=resources/dist/filament-table-repeater.js --watch",
         "build:styles": "npx tailwindcss -i resources/css/plugin.css -o resources/dist/filament-table-repeater.css --postcss --minify && npm run purge",
-        "build:scripts": "esbuild resources/js/plugin.js --bundle --minify --outfile=resources/dist/filament-table-repeater.js",
         "purge": "filament-purge -i resources/dist/filament-table-repeater.css -o resources/dist/filament-table-repeater.css",
         "dev": "npm-run-all --parallel dev:*",
         "build": "npm-run-all build:*"
