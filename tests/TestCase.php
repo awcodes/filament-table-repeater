@@ -2,11 +2,11 @@
 
 namespace Awcodes\FilamentTableRepeater\Tests;
 
+use Awcodes\FilamentTableRepeater\FilamentTableRepeaterServiceProvider;
 use Filament\FilamentServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Awcodes\FilamentTableRepeater\FilamentTableRepeaterServiceProvider;
 
 class TestCase extends Orchestra
 {
