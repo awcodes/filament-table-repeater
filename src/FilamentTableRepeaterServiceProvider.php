@@ -1,13 +1,13 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Awcodes\FilamentTableRepeater;
 
 use Filament\PluginServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 
-class SkeletonServiceProvider extends PluginServiceProvider
+class FilamentTableRepeaterServiceProvider extends PluginServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'filament-table-repeater';
 
     protected array $resources = [
         // CustomResource::class,
@@ -22,15 +22,15 @@ class SkeletonServiceProvider extends PluginServiceProvider
     ];
 
     protected array $styles = [
-        'plugin-skeleton' => __DIR__ . '/../resources/dist/skeleton.css',
+        'plugin-filament-table-repeater' => __DIR__ . '/../resources/dist/filament-table-repeater.css',
     ];
 
     protected array $scripts = [
-        'plugin-skeleton' => __DIR__ . '/../resources/dist/skeleton.js',
+        'plugin-filament-table-repeater' => __DIR__ . '/../resources/dist/filament-table-repeater.js',
     ];
 
     // protected array $beforeCoreScripts = [
-    //     'plugin-skeleton' => __DIR__ . '/../resources/dist/skeleton.js',
+    //     'plugin-filament-table-repeater' => __DIR__ . '/../resources/dist/filament-table-repeater.js',
     // ];
 
     public function configurePackage(Package $package): void
