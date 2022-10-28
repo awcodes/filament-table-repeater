@@ -20,6 +20,14 @@ class TableRepeater extends Repeater
 
     public function getHeaders(): array
     {
+        if (filled($this->headers)) {
+            return $this->evaluate($this->headers);
+        }
+
+        foreach ($this->getChildComponents() as $field) {
+            $this->headers[] = $field->getLabel();
+        }
+
         return $this->evaluate($this->headers);
     }
 }

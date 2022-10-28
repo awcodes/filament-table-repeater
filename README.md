@@ -1,13 +1,12 @@
-# This is my package filament-table-repeater
+# Filament Table Repeater Plugin
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/awcodes/filament-table-repeater/run-tests?label=tests)](https://github.com/awcodes/filament-table-repeater/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/awcodes/filament-table-repeater/Check%20&%20fix%20styling?label=code%20style)](https://github.com/awcodes/filament-table-repeater/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 
+![screenshot in dark mode](./images/dark-mode.jpg)
 
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+![screenshot in light mode](./images/light-mode.jpg)
 
 ## Installation
 
@@ -17,43 +16,46 @@ You can install the package via composer:
 composer require awcodes/filament-table-repeater
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filament-table-repeater-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-table-repeater-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-table-repeater-views"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 ## Usage
 
+This field has most of the same functionality of the [Filament Repeater](https://filamentphp.com/docs/2.x/forms/fields#repeater) field. The main exception is that this field can not be collapsed.
+
 ```php
-$filament-table-repeater = new Awcodes\FilamentTableRepeater();
-echo $filament-table-repeater->echoPhrase('Hello, Awcodes!');
+TableRepeater::make('social')
+    ->schema([
+        Select::make('platform')
+            ->disableLabel()
+            ->options([
+                'facebook' => 'Facebook',
+                'twitter' => 'Twitter',
+                'instagram' => 'Instagram'
+            ]),
+        TextInput::make('handle')
+            ->disableLabel(),
+    ])
+    ->columnSpan('full')
 ```
 
-## Testing
+By default Table Repeater will automatically create the table headers from your schema labels. This can be overridden by simply passing an array of your desired headers to the `->headers()` method.
 
-```bash
-composer test
+```php
+TableRepeater::make('social')
+    ->headers(['Platform', 'Handle'])
+    ->schema([
+        ...
+    ])
+    ->columnSpan('full')
+```
+
+## Themeing
+
+If you are using a custom theme for Filament you will need to add this plugin's views to your Tailwind CSS config.
+
+```js
+content: [
+    ...
+    "./vendor/awcodes/filament-table-repeater/resources/views/**/*.blade.php",
+],
 ```
 
 ## Changelog

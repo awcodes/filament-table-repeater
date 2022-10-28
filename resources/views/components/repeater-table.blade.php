@@ -21,11 +21,11 @@
     @endphp
 
     <div {{ $attributes->merge($getExtraAttributes())->class([
-        'filament-forms-repeater-component space-y-6',
+        'filament-table-repeater-component space-y-6',
     ]) }}>
 
         <div @class([
-            'rounded-xl border border-gray-200 overflow-hidden bg-gray-50',
+            'rounded-xl border border-gray-200 overflow-y-hidden overflow-x-auto bg-gray-50',
             'dark:bg-gray-500/10 dark:border-gray-700' => config('forms.dark_mode'),
         ])>
             <table class="min-w-full -mb-px">
@@ -37,7 +37,7 @@
                     @foreach ($getHeaders() as $header)
                         <th
                             @class([
-                                'py-2 px-2 text-left rtl:text-right bg-gray-100 text-sm',
+                                'py-2 px-2 text-left rtl:text-right bg-gray-100 text-sm min-w-[175px]',
                                 'dark:bg-gray-900/60' => config('forms.dark_mode')
                         ])>{{ $header }}</th>
                     @endforeach
