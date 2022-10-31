@@ -66,9 +66,13 @@
                             ])
                         >
                             @foreach($row->getComponents() as $cell)
-                                <td class="p-2">
+                                @if(! $field instanceof \Filament\Forms\Components\Hidden && ! $field->isHidden())
+                                    <td class="p-2">
+                                        {{ $cell }}
+                                    </td>
+                                @else
                                     {{ $cell }}
-                                </td>
+                                @endif
                             @endforeach
 
                             @if ($hasActions)

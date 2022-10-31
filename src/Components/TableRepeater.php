@@ -3,6 +3,7 @@
 namespace Awcodes\FilamentTableRepeater\Components;
 
 use Closure;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 
 class TableRepeater extends Repeater
@@ -25,6 +26,10 @@ class TableRepeater extends Repeater
         }
 
         foreach ($this->getChildComponents() as $field) {
+            if($field instanceof Hidden || $field->isHidden()) {
+                continue;
+            }
+
             $this->headers[] = $field->getLabel();
         }
 
