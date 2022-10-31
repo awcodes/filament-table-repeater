@@ -11,6 +11,25 @@ class TableRepeater extends Repeater
 
     protected string $view = 'filament-table-repeater::components.repeater-table';
 
+    protected bool | Closure $showLabels = true;
+
+    public function getChildComponents(): array
+    {
+        $components = parent::getChildComponents();
+
+        if ($this->shouldShowLabels()) {
+            return $components;
+        }
+
+        foreach ($components as $component) {
+            if (method_exists($component, 'disableLabel')) {
+                $component->disableLabel();
+            }
+        }
+
+        return $components;
+    }
+
     public function headers(array | Closure $headers): static
     {
         $this->headers = $headers;
@@ -29,5 +48,24 @@ class TableRepeater extends Repeater
         }
 
         return $this->evaluate($this->headers);
+    }
+
+    public function showLabels(bool | Closure $show = true): static
+    {
+        $this->showLabels = $show;
+
+        return $this;
+    }
+
+    public function hideLabels(): static
+    {
+        $this->showLabels = false;
+
+        return $this;
+    }
+
+    protected function shouldShowLabels(): bool
+    {
+        return $this->evaluate($this->showLabels);
     }
 }
