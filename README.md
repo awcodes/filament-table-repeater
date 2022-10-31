@@ -36,7 +36,7 @@ TableRepeater::make('social')
     ->columnSpan('full')
 ```
 
-By default Table Repeater will automatically create the table headers from your schema labels. This can be overridden by simply passing an array of your desired headers to the `->headers()` method.
+By default, Table Repeater will automatically create the table headers from your schema labels. This can be overridden by simply passing an array of your desired headers to the `->headers()` method.
 
 ```php
 TableRepeater::make('social')
@@ -45,6 +45,18 @@ TableRepeater::make('social')
         ...
     ])
     ->columnSpan('full')
+```
+
+### Labels
+
+To automatically hide all the labels of the fields in the table use the `->hideLabels()` method.
+
+```php
+TableRepeater::make('social')
+    ->hideLabels()
+    ->schema([
+        ...
+    ])
 ```
 
 ## Themeing
