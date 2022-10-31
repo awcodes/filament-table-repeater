@@ -45,7 +45,7 @@ class TableRepeater extends Repeater
         }
 
         foreach ($this->getChildComponents() as $field) {
-            if($field instanceof Hidden || $field->isHidden()) {
+            if ($field instanceof Hidden || $field->isHidden()) {
                 continue;
             }
 
