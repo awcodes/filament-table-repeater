@@ -2,6 +2,18 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.0.2 - 2022-11-02
+
+### What's Changed
+
+- Feature: Card/Table hybrid by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/4
+
+### New Contributors
+
+- @awcodes made their first contribution in https://github.com/awcodes/filament-table-repeater/pull/4
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.1...v1.0.2
+
 ## v1.0.1 - 2022-10-31
 
 ### What's Changed
