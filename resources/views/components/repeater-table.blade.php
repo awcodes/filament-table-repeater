@@ -21,63 +21,86 @@
     @endphp
 
     <div {{ $attributes->merge($getExtraAttributes())->class([
-        'filament-table-repeater-component space-y-6',
+        'filament-table-repeater-component space-y-6 relative',
     ]) }}>
 
         <div @class([
-            'rounded-xl border border-gray-200 overflow-y-hidden overflow-x-auto bg-gray-50',
+            'filament-table-repeater-container rounded-xl bg-gray-50 md:border md:border-gray-300 relative',
             'dark:bg-gray-500/10 dark:border-gray-700' => config('forms.dark_mode'),
-        ])>
-            <table class="min-w-full -mb-px">
-                <thead>
-                <tr @class([
-                            'divide-x divide-gray-200 border-b border-gray-200',
-                            'dark:divide-gray-700 dark:border-gray-700' => config('forms.dark_mode'),
-                        ])>
-                    @foreach ($getHeaders() as $header)
-                        <th
-                            @class([
-                                'py-2 px-2 text-left rtl:text-right bg-gray-100 text-sm min-w-[175px]',
-                                'dark:bg-gray-900/60' => config('forms.dark_mode')
-                        ])>{{ $header }}</th>
-                    @endforeach
-                    @if ($hasActions)
-                        <th @class([
-                                    'py-2 px-2 text-left rtl:text-right bg-gray-100 text-sm',
-                                    'dark:bg-gray-900/60' => config('forms.dark_mode')
-                            ])>
-                            <span class="sr-only">{{ __('filament-table-repeater::components.repeater.row_actions.label') }}</span>
-                        </th>
-                    @endif
-                </tr>
-                </thead>
-                <tbody
-                    wire:sortable
-                    wire:end.stop="dispatchFormEvent('repeater::moveItems', '{{ $getStatePath() }}', $event.target.sortable.toArray())"
-                >
+            'border border-gray-300' => count($containers) > 0,
+        ]) style="--table-repeater-col-count: {{count($getHeaders())}}">
+            <div @class([
+                    'filament-table-repeater-row filament-table-repeater-header-row md:divide-x md:divide-gray-300 overflow-hidden',
+                    'dark:md:divide-gray-700' => config('forms.dark_mode'),
+                    'border-b border-gray-300 rounded-t-xl' => count($containers) > 0,
+                    'rounded-xl' => count($containers) === 0,
+                    'dark:border-gray-700' => config('forms.dark_mode') && count($containers) > 0,
+                ])>
+                @foreach ($getHeaders() as $header)
+                    <div @class([
+                            'filament-table-repeater-header-column p-2 bg-gray-200/50 text-sm',
+                            'dark:bg-gray-900/60' => config('forms.dark_mode')
+                    ])>
+                        {{ $header }}
+                    </div>
+                @endforeach
+                @if ($hasActions)
+                    <div @class([
+                        'filament-table-repeater-header-column p-2 bg-gray-200/50 text-sm',
+                        'dark:bg-gray-900/60' => config('forms.dark_mode')
+                    ])>
+                        <div class="flex items-center">
+                            @unless ($isItemMovementDisabled)
+                                <div class="w-8"></div>
+                            @endunless
+
+                            @if ($isCloneable)
+                                <div class="w-8"></div>
+                            @endunless
+
+                            @unless ($isItemDeletionDisabled)
+                                <div class="w-8"></div>
+                            @endunless
+                        </div>
+                        <span class="sr-only">
+                            {{ __('filament-table-repeater::components.repeater.row_actions.label') }}
+                        </span>
+                    </div>
+                @endif
+            </div>
+            <ul wire:sortable
+                wire:end.stop="dispatchFormEvent('repeater::moveItems', '{{ $getStatePath() }}', $event.target.sortable.toArray())"
+                @class([
+                    'filament-table-repeater-rows-wrapper divide-y divide-gray-300',
+                    'dark:divide-gray-700' => config('forms.dark_mode')
+                ])
+            >
                 @if (count($containers))
                     @foreach ($containers as $uuid => $row)
-                        <tr
+                        <li
                             wire:key="{{ $this->id }}.{{ $row->getStatePath() }}.item"
                             wire:sortable.item="{{ $uuid }}"
                             @class([
-                                'divide-x divide-gray-200 border-b border-gray-200',
-                                'dark:divide-gray-700 dark:border-gray-700' => config('forms.dark_mode'),
+                                'filament-table-repeater-row md:divide-x md:divide-gray-300',
+                                'dark:md:divide-gray-700' => config('forms.dark_mode')
                             ])
                         >
                             @foreach($row->getComponents() as $cell)
-                                @if(! $field instanceof \Filament\Forms\Components\Hidden && ! $field->isHidden())
-                                    <td class="p-2">
+                                @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
+                                    <div @class([
+                                        'filament-table-repeater-column',
+                                        'has-hidden-label' => $cell->isLabelHidden(),
+                                    ])>
                                         {{ $cell }}
-                                    </td>
+                                    </div>
                                 @else
                                     {{ $cell }}
                                 @endif
                             @endforeach
 
                             @if ($hasActions)
-                                <td class="p-2 w-px">
-                                    <div class="flex items-center">
+                                <div class="filament-table-repeater-column">
+                                    <div class="flex items-center md:h-full">
                                         @unless ($isItemMovementDisabled)
                                             <button
                                                 title="{{ __('forms::components.repeater.buttons.move_item.label') }}"
@@ -91,9 +114,9 @@
                                                     'dark:border-gray-700' => config('forms.dark_mode'),
                                                 ])
                                             >
-                                                <span class="sr-only">
-                                                    {{ __('forms::components.repeater.buttons.move_item.label') }}
-                                                </span>
+                                                    <span class="sr-only">
+                                                        {{ __('forms::components.repeater.buttons.move_item.label') }}
+                                                    </span>
 
                                                 <x-heroicon-s-switch-vertical class="w-4 h-4"/>
                                             </button>
@@ -109,9 +132,9 @@
                                                     'dark:border-gray-700' => config('forms.dark_mode'),
                                                 ])
                                             >
-                                                    <span class="sr-only">
-                                                        {{ __('forms::components.repeater.buttons.clone_item.label') }}
-                                                    </span>
+                                                        <span class="sr-only">
+                                                            {{ __('forms::components.repeater.buttons.clone_item.label') }}
+                                                        </span>
 
                                                 <x-heroicon-s-duplicate class="w-4 h-4"/>
                                             </button>
@@ -127,22 +150,21 @@
                                                     'dark:text-danger-500 dark:hover:text-danger-400' => config('forms.dark_mode'),
                                                 ])
                                             >
-                                                    <span class="sr-only">
-                                                        {{ __('forms::components.repeater.buttons.delete_item.label') }}
-                                                    </span>
+                                                        <span class="sr-only">
+                                                            {{ __('forms::components.repeater.buttons.delete_item.label') }}
+                                                        </span>
 
                                                 <x-heroicon-s-trash class="w-4 h-4"/>
                                             </button>
                                         @endunless
                                     </div>
-                                </td>
+                                </div>
                             @endif
 
-                        </tr>
+                        </li>
                     @endforeach
                 @endif
-                </tbody>
-            </table>
+            </ul>
         </div>
 
         @if (! $isItemCreationDisabled)

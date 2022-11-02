@@ -1,1 +1,29 @@
 @tailwind utilities;
+
+.filament-table-repeater-component .choices input {
+    min-width: 100% !important;
+}
+
+.filament-table-repeater-header-row {
+    @apply hidden;
+}
+
+.filament-table-repeater-row {
+    @apply p-4 md:p-0 space-y-4 md:space-y-0;
+}
+
+.filament-table-repeater-column {
+    @apply md:p-2;
+}
+
+.filament-table-repeater-column.has-hidden-label label {
+    @apply not-sr-only md:sr-only;
+}
+
+@screen md {
+    .filament-table-repeater-row {
+        display: grid;
+        grid-template-columns: repeat(var(--table-repeater-col-count), 1fr) auto;
+        align-content: center;
+    }
+}
