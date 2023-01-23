@@ -14,7 +14,7 @@ class TableRepeater extends Repeater
 
     protected array|Closure $columnWidths = [];
 
-    protected bool | Closure $showLabels = true;
+    protected bool|Closure $showLabels = true;
 
     public function getChildComponents(): array
     {
@@ -33,14 +33,14 @@ class TableRepeater extends Repeater
         return $components;
     }
 
-    public function headers(array | Closure $headers): static
+    public function headers(array|Closure $headers): static
     {
         $this->headers = $headers;
 
         return $this;
     }
 
-    public function columnWidths(array | Closure $widths = []): static
+    public function columnWidths(array|Closure $widths = []): static
     {
         $this->columnWidths = $widths;
 
@@ -64,7 +64,7 @@ class TableRepeater extends Repeater
         return $this->evaluate($this->headers);
     }
 
-    public function showLabels(bool | Closure $show = true): static
+    public function showLabels(bool|Closure $show = true): static
     {
         $this->showLabels = $show;
 
