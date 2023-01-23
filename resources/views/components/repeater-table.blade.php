@@ -43,7 +43,7 @@
                             'filament-table-repeater-header-column p-2 bg-gray-200/50 text-sm flex-1',
                             'dark:bg-gray-900/60' => config('forms.dark_mode')
                         ])
-                        @if (filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
+                        @if ($columnWidths && filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
                             style="max-width: {{ $columnWidths[$loop->index] }}"
                         @endif
                     >
@@ -98,7 +98,7 @@
                                             'filament-table-repeater-column flex-1',
                                             'has-hidden-label' => $cell->isLabelHidden(),
                                         ])
-                                        @if (filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
+                                        @if ($columnWidths && filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
                                             style="max-width: {{ $columnWidths[$loop->index] }}"
                                         @endif
                                     >
