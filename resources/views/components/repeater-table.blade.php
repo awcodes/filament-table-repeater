@@ -16,6 +16,7 @@
         $isItemCreationDisabled = $isItemCreationDisabled();
         $isItemDeletionDisabled = $isItemDeletionDisabled();
         $isItemMovementDisabled = $isItemMovementDisabled();
+        $columnWidths = $getColumnWidths();
 
         $hasActions = (! $isItemMovementDisabled) || (! $isItemDeletionDisabled) || $isCloneable;
     @endphp
@@ -37,10 +38,15 @@
                     'dark:border-gray-700' => config('forms.dark_mode') && count($containers) > 0,
                 ])>
                 @foreach ($getHeaders() as $header)
-                    <div @class([
-                            'filament-table-repeater-header-column p-2 bg-gray-200/50 text-sm',
+                    <div
+                        @class([
+                            'filament-table-repeater-header-column p-2 bg-gray-200/50 text-sm flex-1',
                             'dark:bg-gray-900/60' => config('forms.dark_mode')
-                    ])>
+                        ])
+                        @if (filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
+                            style="max-width: {{ $columnWidths[$loop->index] }}"
+                        @endif
+                    >
                         {{ $header }}
                     </div>
                 @endforeach
@@ -87,10 +93,15 @@
                         >
                             @foreach($row->getComponents() as $cell)
                                 @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
-                                    <div @class([
-                                        'filament-table-repeater-column',
-                                        'has-hidden-label' => $cell->isLabelHidden(),
-                                    ])>
+                                    <div
+                                        @class([
+                                            'filament-table-repeater-column flex-1',
+                                            'has-hidden-label' => $cell->isLabelHidden(),
+                                        ])
+                                        @if (filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
+                                            style="max-width: {{ $columnWidths[$loop->index] }}"
+                                        @endif
+                                    >
                                         {{ $cell }}
                                     </div>
                                 @else

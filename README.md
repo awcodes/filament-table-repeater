@@ -59,7 +59,25 @@ TableRepeater::make('social')
     ])
 ```
 
-## Themeing
+### Column Widths
+
+To set the width of columns in the table use the `columnWidths()` method. 
+Widths should be set in px as a string or 'auto' for the default. Each item 
+will map to the matching index in the schema.
+
+```php
+TableRepeater::make('social')
+    ->columnWidths([
+        '200px',
+        'auto'
+    ])
+    ->schema([
+        Select::make('platform'), // will be 200px wide
+        TextInput::make('handle'), // will be default stretched width
+    ])
+```
+
+## Theming
 
 If you are using a custom theme for Filament you will need to add this plugin's views to your Tailwind CSS config.
 
