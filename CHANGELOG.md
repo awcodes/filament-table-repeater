@@ -2,6 +2,14 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.0.4 - 2023-01-23
+
+### What's Changed
+
+- Fix: nullable column widths by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/9
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.3...v1.0.4
+
 ## v1.0.3 - 2023-01-23
 
 ### What's Changed
