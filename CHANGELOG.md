@@ -2,6 +2,18 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.0.3 - 2023-01-23
+
+### What's Changed
+
+- Feat: Add column widths by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/8
+
+### New Contributors
+
+- @dependabot made their first contribution in https://github.com/awcodes/filament-table-repeater/pull/5
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.2...v1.0.3
+
 ## v1.0.2 - 2022-11-02
 
 ### What's Changed
