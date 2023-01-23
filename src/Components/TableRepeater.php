@@ -8,9 +8,11 @@ use Filament\Forms\Components\Repeater;
 
 class TableRepeater extends Repeater
 {
+    protected string $view = 'filament-table-repeater::components.repeater-table';
+
     private Closure|array $headers = [];
 
-    protected string $view = 'filament-table-repeater::components.repeater-table';
+    protected array|Closure $columnWidths = [];
 
     protected bool | Closure $showLabels = true;
 
@@ -38,6 +40,13 @@ class TableRepeater extends Repeater
         return $this;
     }
 
+    public function columnWidths(array | Closure $widths = []): static
+    {
+        $this->columnWidths = $widths;
+
+        return $this;
+    }
+
     public function getHeaders(): array
     {
         if (filled($this->headers)) {
@@ -60,6 +69,11 @@ class TableRepeater extends Repeater
         $this->showLabels = $show;
 
         return $this;
+    }
+
+    public function getColumnWidths(): array
+    {
+        return $this->evaluate($this->columnWidths);
     }
 
     public function hideLabels(): static
