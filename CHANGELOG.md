@@ -2,6 +2,14 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.0.5 - 2023-01-24
+
+### What's Changed
+
+- Tweak: Column widths method and headers to accomodate unset indexes by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/10
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.4...v1.0.5
+
 ## v1.0.4 - 2023-01-23
 
 ### What's Changed
