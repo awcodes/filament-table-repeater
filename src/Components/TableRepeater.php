@@ -10,7 +10,7 @@ class TableRepeater extends Repeater
 {
     protected string $view = 'filament-table-repeater::components.repeater-table';
 
-    private Closure|array $headers = [];
+    protected Closure|array $headers = [];
 
     protected array|Closure $columnWidths = [];
 
@@ -49,17 +49,19 @@ class TableRepeater extends Repeater
 
     public function getHeaders(): array
     {
-        if (filled($this->headers)) {
-            return $this->evaluate($this->headers);
-        }
+        $mergedHeaders = [];
 
-        foreach ($this->getChildComponents() as $field) {
+        foreach ($this->getChildComponents() as $key => $field) {
             if ($field instanceof Hidden || $field->isHidden()) {
                 continue;
             }
 
-            $this->headers[] = $field->getLabel();
+            $customHeaders = $this->evaluate($this->headers);
+
+            $mergedHeaders[$field->getName()] = $customHeaders[$key] ?? $field->getLabel();
         }
+
+        $this->headers = $mergedHeaders;
 
         return $this->evaluate($this->headers);
     }
