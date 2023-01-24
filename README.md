@@ -62,14 +62,12 @@ TableRepeater::make('social')
 ### Column Widths
 
 To set the width of columns in the table use the `columnWidths()` method. 
-Widths should be set in px as a string or 'auto' for the default. Each item 
-will map to the matching index in the schema.
+Widths should be set in px as a string. 
 
 ```php
 TableRepeater::make('social')
     ->columnWidths([
-        '200px',
-        'auto'
+        'platform' => '200px',
     ])
     ->schema([
         Select::make('platform'), // will be 200px wide

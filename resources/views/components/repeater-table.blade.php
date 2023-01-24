@@ -16,6 +16,7 @@
         $isItemCreationDisabled = $isItemCreationDisabled();
         $isItemDeletionDisabled = $isItemDeletionDisabled();
         $isItemMovementDisabled = $isItemMovementDisabled();
+        $headers = $getHeaders();
         $columnWidths = $getColumnWidths();
 
         $hasActions = (! $isItemMovementDisabled) || (! $isItemDeletionDisabled) || $isCloneable;
@@ -37,14 +38,14 @@
                     'rounded-xl' => count($containers) === 0,
                     'dark:border-gray-700' => config('forms.dark_mode') && count($containers) > 0,
                 ])>
-                @foreach ($getHeaders() as $header)
+                @foreach ($headers as $key => $header)
                     <div
                         @class([
                             'filament-table-repeater-header-column p-2 bg-gray-200/50 text-sm flex-1',
                             'dark:bg-gray-900/60' => config('forms.dark_mode')
                         ])
-                        @if ($columnWidths && filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
-                            style="max-width: {{ $columnWidths[$loop->index] }}"
+                        @if ($columnWidths && isset($columnWidths[$key]))
+                            style="max-width: {{ $columnWidths[$key] }}"
                         @endif
                     >
                         {{ $header }}
@@ -98,8 +99,8 @@
                                             'filament-table-repeater-column flex-1',
                                             'has-hidden-label' => $cell->isLabelHidden(),
                                         ])
-                                        @if ($columnWidths && filled($columnWidths[$loop->index]) && $columnWidths[$loop->index] !== 'auto')
-                                            style="max-width: {{ $columnWidths[$loop->index] }}"
+                                        @if ($columnWidths && isset($columnWidths[$cell->getName()]))
+                                            style="max-width: {{ $columnWidths[$cell->getName()] }}"
                                         @endif
                                     >
                                         {{ $cell }}
