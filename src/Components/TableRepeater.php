@@ -58,7 +58,7 @@ class TableRepeater extends Repeater
 
             $customHeaders = $this->evaluate($this->headers);
 
-            $mergedHeaders[$field->getId()] = $customHeaders[$key] ?? $field->getLabel();
+            $mergedHeaders[method_exists($field, 'getName') ? $field->getName() : $field->getId()] = $customHeaders[$key] ?? $field->getLabel();
         }
 
         $this->headers = $mergedHeaders;
