@@ -2,6 +2,18 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.0.6 - 2023-01-27
+
+### What's Changed
+
+- Fixed key for merged arrays. by @danielbehrendt in https://github.com/awcodes/filament-table-repeater/pull/11
+
+### New Contributors
+
+- @danielbehrendt made their first contribution in https://github.com/awcodes/filament-table-repeater/pull/11
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.5...v1.0.6
+
 ## v1.0.5 - 2023-01-24
 
 ### What's Changed
