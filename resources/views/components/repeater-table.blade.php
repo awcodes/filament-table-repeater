@@ -32,7 +32,7 @@
             'border border-gray-300' => count($containers) > 0,
         ]) style="--table-repeater-col-count: {{count($getHeaders())}}">
             <div @class([
-                    'filament-table-repeater-row filament-table-repeater-header-row md:divide-x md:divide-gray-300 overflow-hidden',
+                    'filament-table-repeater-row filament-table-repeater-header-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 overflow-hidden',
                     'dark:md:divide-gray-700' => config('forms.dark_mode'),
                     'border-b border-gray-300 rounded-t-xl' => count($containers) > 0,
                     'rounded-xl' => count($containers) === 0,
@@ -88,7 +88,7 @@
                             wire:key="{{ $this->id }}.{{ $row->getStatePath() }}.item"
                             wire:sortable.item="{{ $uuid }}"
                             @class([
-                                'filament-table-repeater-row md:divide-x md:divide-gray-300',
+                                'filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300',
                                 'dark:md:divide-gray-700' => config('forms.dark_mode')
                             ])
                         >
