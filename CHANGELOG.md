@@ -2,6 +2,18 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.0.7 - 2023-01-30
+
+### What's Changed
+
+- Fix divide on RTL by @AAbosham in https://github.com/awcodes/filament-table-repeater/pull/12
+
+### New Contributors
+
+- @AAbosham made their first contribution in https://github.com/awcodes/filament-table-repeater/pull/12
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.6...v1.0.7
+
 ## v1.0.6 - 2023-01-27
 
 ### What's Changed
