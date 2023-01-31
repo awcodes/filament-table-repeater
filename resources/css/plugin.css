@@ -4,26 +4,29 @@
     min-width: 100% !important;
 }
 
-.filament-table-repeater-header-row {
-    @apply hidden;
-}
-
-.filament-table-repeater-row {
-    @apply p-4 md:p-0 space-y-4 md:space-y-0 md:flex md:items-center;
-}
-
-.filament-table-repeater-header-column,
-.filament-table-repeater-column {
-    @apply md:p-2 md:self-stretch;
-}
-
 .filament-table-repeater-column.has-hidden-label label {
     @apply not-sr-only text-sm mb-2 md:sr-only;
 }
 
 @media (max-width: 767px) {
-    .filament-table-repeater-header-column,
-    .filament-table-repeater-column {
-        max-width: 100% !important;
+    .filament-table-repeater-component table {
+        @apply block w-full;
+
+        thead,
+        thead tr,
+        thead th {
+            @apply block !w-full sr-only;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            @apply block !w-full;
+        }
+
+        tbody tr {
+            @apply p-2;
+        }
     }
 }
+
