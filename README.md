@@ -5,7 +5,6 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 
 ![screenshot in dark mode](./images/dark-mode.jpg)
-
 ![screenshot in light mode](./images/light-mode.jpg)
 
 ## Installation
@@ -72,6 +71,21 @@ TableRepeater::make('social')
     ->schema([
         Select::make('platform'), // will be 200px wide
         TextInput::make('handle'), // will be default stretched width
+    ])
+```
+
+### Break Point
+
+Below a specific break point the table will render as a set of panels to 
+make working with data easier on mobile devices. The default is 'md', but 
+can be overridden with the `breakPoint()` method.
+
+```php
+TableRepeater::make('social')
+    ->breakPoint('sm') // accepts Tailwind CSS screen sizes
+    ->schema([
+        Select::make('platform'),
+        TextInput::make('handle'),
     ])
 ```
 

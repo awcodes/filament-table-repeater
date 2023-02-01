@@ -4,26 +4,117 @@
     min-width: 100% !important;
 }
 
-.filament-table-repeater-header-row {
-    @apply hidden;
-}
-
-.filament-table-repeater-row {
-    @apply p-4 md:p-0 space-y-4 md:space-y-0 md:flex md:items-center;
-}
-
-.filament-table-repeater-header-column,
-.filament-table-repeater-column {
-    @apply md:p-2 md:self-stretch;
-}
-
 .filament-table-repeater-column.has-hidden-label label {
     @apply not-sr-only text-sm mb-2 md:sr-only;
 }
 
-@media (max-width: 767px) {
-    .filament-table-repeater-header-column,
-    .filament-table-repeater-column {
-        max-width: 100% !important;
+@media (max-width: 640px) {
+    .filament-table-repeater-component.break-point-sm table {
+        @apply block w-full;
+
+        thead,
+        thead tr,
+        thead th {
+            @apply block !w-full sr-only;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            @apply block !w-full;
+        }
+
+        tbody tr {
+            @apply p-2;
+        }
     }
 }
+
+@media (max-width: 768px) {
+    .filament-table-repeater-component.break-point-md table {
+        @apply block w-full;
+
+        thead,
+        thead tr,
+        thead th {
+            @apply block !w-full sr-only;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            @apply block !w-full;
+        }
+
+        tbody tr {
+            @apply p-2;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .filament-table-repeater-component.break-point-lg table {
+        @apply block w-full;
+
+        thead,
+        thead tr,
+        thead th {
+            @apply block !w-full sr-only;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            @apply block !w-full;
+        }
+
+        tbody tr {
+            @apply p-2;
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .filament-table-repeater-component.break-point-xl table {
+        @apply block w-full;
+
+        thead,
+        thead tr,
+        thead th {
+            @apply block !w-full sr-only;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            @apply block !w-full;
+        }
+
+        tbody tr {
+            @apply p-2;
+        }
+    }
+}
+
+@media (max-width: 1536px) {
+    .filament-table-repeater-component.break-point-2xl table {
+        @apply block w-full;
+
+        thead,
+        thead tr,
+        thead th {
+            @apply block !w-full sr-only;
+        }
+
+        tbody,
+        tbody tr,
+        tbody td {
+            @apply block !w-full;
+        }
+
+        tbody tr {
+            @apply p-2;
+        }
+    }
+}
+

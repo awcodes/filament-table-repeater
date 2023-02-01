@@ -16,6 +16,29 @@ class TableRepeater extends Repeater
 
     protected bool|Closure $showLabels = true;
 
+    protected string $breakPoint = 'md';
+
+    public function headers(array|Closure $headers): static
+    {
+        $this->headers = $headers;
+
+        return $this;
+    }
+
+    public function columnWidths(array|Closure $widths = []): static
+    {
+        $this->columnWidths = $widths;
+
+        return $this;
+    }
+
+    public function breakPoint(string $breakPoint = 'md'): static
+    {
+        $this->breakPoint = $breakPoint;
+
+        return $this;
+    }
+
     public function getChildComponents(): array
     {
         $components = parent::getChildComponents();
@@ -31,20 +54,6 @@ class TableRepeater extends Repeater
         }
 
         return $components;
-    }
-
-    public function headers(array|Closure $headers): static
-    {
-        $this->headers = $headers;
-
-        return $this;
-    }
-
-    public function columnWidths(array|Closure $widths = []): static
-    {
-        $this->columnWidths = $widths;
-
-        return $this;
     }
 
     public function getHeaders(): array
@@ -76,6 +85,11 @@ class TableRepeater extends Repeater
     public function getColumnWidths(): array
     {
         return $this->evaluate($this->columnWidths);
+    }
+
+    public function getBreakPoint(): string
+    {
+        return $this->breakPoint;
     }
 
     public function hideLabels(): static
