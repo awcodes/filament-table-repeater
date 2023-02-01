@@ -18,18 +18,30 @@
         $isItemMovementDisabled = $isItemMovementDisabled();
         $headers = $getHeaders();
         $columnWidths = $getColumnWidths();
+        $breakPoint = $getBreakPoint();
 
         $hasActions = (! $isItemMovementDisabled) || (! $isItemDeletionDisabled) || $isCloneable;
     @endphp
 
     <div {{ $attributes->merge($getExtraAttributes())->class([
         'filament-table-repeater-component space-y-6 relative',
+        match ($breakPoint) {
+            'sm' => 'break-point-sm',
+            'lg' => 'break-point-lg',
+            'xl' => 'break-point-xl',
+            '2xl' => 'break-point-2xl',
+            default => 'break-point-md',
+        }
     ]) }}>
 
         <div @class([
             'filament-table-repeater-container rounded-xl overflow-hidden bg-gray-50 relative dark:bg-gray-500/10',
             'border border-gray-300 dark:border-gray-700' => count($containers) > 0,
-            'md:border md:border-gray-300 dark:md:border-gray-700' => count($containers) === 0,
+            'sm:border sm:border-gray-300 dark:sm:border-gray-700' => count($containers) === 0 && $breakPoint === 'sm',
+            'md:border md:border-gray-300 dark:md:border-gray-700' => count($containers) === 0 && $breakPoint === 'md',
+            'lg:border lg:border-gray-300 dark:lg:border-gray-700' => count($containers) === 0 && $breakPoint === 'lg',
+            'xl:border xl:border-gray-300 dark:xl:border-gray-700' => count($containers) === 0 && $breakPoint === 'xl',
+            '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => count($containers) === 0 && $breakPoint === '2xl',
         ])>
             <table class="w-full">
                 <thead @class([
@@ -39,7 +51,7 @@
                     <tr class="md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700 text-sm">
                         @foreach ($headers as $key => $header)
                             <th
-                                class="filament-table-repeater-header-column p-2 "
+                                class="filament-table-repeater-header-column p-2 text-left"
                                 @if ($columnWidths && isset($columnWidths[$key]))
                                     style="width: {{ $columnWidths[$key] }}"
                                 @endif
