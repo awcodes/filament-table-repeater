@@ -2,6 +2,15 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.1.0 - 2023-02-01
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 by @dependabot in https://github.com/awcodes/filament-table-repeater/pull/13
+- Better column widths by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/14
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.0.7...v1.1.0
+
 ## v1.0.7 - 2023-01-30
 
 ### What's Changed
