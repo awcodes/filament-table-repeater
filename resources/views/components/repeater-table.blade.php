@@ -81,7 +81,6 @@
                         @endif
                     </tr>
                 </thead>
-
                 <tbody
                     wire:sortable
                     wire:end.stop="dispatchFormEvent('repeater::moveItems', '{{ $getStatePath() }}', $event.target.sortable.toArray())"
