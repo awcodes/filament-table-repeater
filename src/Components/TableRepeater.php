@@ -16,6 +16,8 @@ class TableRepeater extends Repeater
 
     protected bool|Closure $showLabels = true;
 
+    protected bool|Closure $withoutHeader = false;
+
     protected string $breakPoint = 'md';
 
     public function headers(array|Closure $headers): static
@@ -102,5 +104,17 @@ class TableRepeater extends Repeater
     protected function shouldShowLabels(): bool
     {
         return $this->evaluate($this->showLabels);
+    }
+
+    public function withoutHeader(bool|Closure $condition = true): static
+    {
+        $this->withoutHeader = $condition;
+
+        return $this;
+    }
+
+    public function shouldHideHeader(): bool
+    {
+        return $this->evaluate($this->withoutHeader);
     }
 }

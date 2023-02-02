@@ -45,6 +45,8 @@
             '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => ! $hasContainers && $breakPoint === '2xl',
         ])>
             <table class="w-full">
+
+                @if (! $shouldHideHeader())
                 <thead @class([
                     'filament-table-repeater-header rounded-t-lg overflow-hidden',
                     'border-b border-gray-300 dark:border-gray-700' => $hasContainers,
@@ -79,6 +81,8 @@
                         @endif
                     </tr>
                 </thead>
+                @endif
+
                 <tbody
                     wire:sortable
                     wire:end.stop="dispatchFormEvent('repeater::moveItems', '{{ $getStatePath() }}', $event.target.sortable.toArray())"
