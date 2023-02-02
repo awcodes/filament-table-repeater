@@ -19,6 +19,7 @@
         $headers = $getHeaders();
         $columnWidths = $getColumnWidths();
         $breakPoint = $getBreakPoint();
+        $hasContainers = count($containers) > 0;
 
         $hasActions = (! $isItemMovementDisabled) || (! $isItemDeletionDisabled) || $isCloneable;
     @endphp
@@ -35,23 +36,29 @@
     ]) }}>
 
         <div @class([
-            'filament-table-repeater-container rounded-xl overflow-hidden bg-gray-50 relative dark:bg-gray-500/10',
-            'border border-gray-300 dark:border-gray-700' => count($containers) > 0,
-            'sm:border sm:border-gray-300 dark:sm:border-gray-700' => count($containers) === 0 && $breakPoint === 'sm',
-            'md:border md:border-gray-300 dark:md:border-gray-700' => count($containers) === 0 && $breakPoint === 'md',
-            'lg:border lg:border-gray-300 dark:lg:border-gray-700' => count($containers) === 0 && $breakPoint === 'lg',
-            'xl:border xl:border-gray-300 dark:xl:border-gray-700' => count($containers) === 0 && $breakPoint === 'xl',
-            '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => count($containers) === 0 && $breakPoint === '2xl',
+            'filament-table-repeater-container rounded-xl bg-gray-50 relative dark:bg-gray-500/10',
+            'border border-gray-300 dark:border-gray-700' => $hasContainers,
+            'sm:border sm:border-gray-300 dark:sm:border-gray-700' => ! $hasContainers && $breakPoint === 'sm',
+            'md:border md:border-gray-300 dark:md:border-gray-700' => ! $hasContainers && $breakPoint === 'md',
+            'lg:border lg:border-gray-300 dark:lg:border-gray-700' => ! $hasContainers && $breakPoint === 'lg',
+            'xl:border xl:border-gray-300 dark:xl:border-gray-700' => ! $hasContainers && $breakPoint === 'xl',
+            '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => ! $hasContainers && $breakPoint === '2xl',
         ])>
             <table class="w-full">
                 <thead @class([
-                    'filament-table-repeater-header bg-gray-200/50 dark:bg-gray-900/60',
-                    'border-b border-gray-300 dark:border-gray-700' => count($containers) > 0,
+                    'filament-table-repeater-header rounded-t-lg overflow-hidden',
+                    'border-b border-gray-300 dark:border-gray-700' => $hasContainers,
                 ])>
                     <tr class="md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700 text-sm">
                         @foreach ($headers as $key => $header)
                             <th
-                                class="filament-table-repeater-header-column p-2 text-left"
+                                @class([
+                                    'filament-table-repeater-header-column p-2 text-left bg-gray-200/50 dark:bg-gray-900/60',
+                                    'ltr:rounded-l-lg rtl:rounded-r-lg' => ! $hasContainers && $loop->first,
+                                    'ltr:rounded-tl-lg rtl:rounded-tr-lg' => $hasContainers && $loop->first,
+                                    'ltr:rounded-r-lg rtl:rounded-l-lg' => ! $hasContainers && $loop->last && ! $hasActions,
+                                    'ltr:rounded-tr-lg rtl:rounded-tl-lg' => $hasContainers && $loop->last && ! $hasActions,
+                                ])
                                 @if ($columnWidths && isset($columnWidths[$key]))
                                     style="width: {{ $columnWidths[$key] }}"
                                 @endif
@@ -60,7 +67,11 @@
                             </th>
                         @endforeach
                         @if ($hasActions)
-                            <th class="filament-table-repeater-header-column p-2 w-px">
+                            <th @class([
+                                'filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px',
+                                'ltr:rounded-r-lg rtl:rounded-l-lg' => ! $hasContainers,
+                                'ltr:rounded-tr-lg rtl:rounded-tl-lg' => $hasContainers,
+                            ])>
                                 <span class="sr-only">
                                     {{ __('filament-table-repeater::components.repeater.row_actions.label') }}
                                 </span>
