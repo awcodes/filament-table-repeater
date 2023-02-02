@@ -2,6 +2,14 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.1.1 - 2023-02-02
+
+### What's Changed
+
+- Fix: overflow issues with select inputs by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/15
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.1.0...v1.1.1
+
 ## v1.1.0 - 2023-02-01
 
 ### What's Changed
