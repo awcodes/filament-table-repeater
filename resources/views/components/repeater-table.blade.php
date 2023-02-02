@@ -20,6 +20,7 @@
         $columnWidths = $getColumnWidths();
         $breakPoint = $getBreakPoint();
         $hasContainers = count($containers) > 0;
+        $hasHiddenHeader = $shouldHideHeader();
 
         $hasActions = (! $isItemMovementDisabled) || (! $isItemDeletionDisabled) || $isCloneable;
     @endphp
@@ -45,11 +46,10 @@
             '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => ! $hasContainers && $breakPoint === '2xl',
         ])>
             <table class="w-full">
-
-                @if (! $shouldHideHeader())
                 <thead @class([
-                    'filament-table-repeater-header rounded-t-lg overflow-hidden',
-                    'border-b border-gray-300 dark:border-gray-700' => $hasContainers,
+                    'sr-only' => $hasHiddenHeader,
+                    'filament-table-repeater-header rounded-t-lg overflow-hidden' => ! $hasHiddenHeader,
+                    'border-b border-gray-300 dark:border-gray-700' => ! $hasHiddenHeader && $hasContainers,
                 ])>
                     <tr class="md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700 text-sm">
                         @foreach ($headers as $key => $header)
@@ -81,7 +81,6 @@
                         @endif
                     </tr>
                 </thead>
-                @endif
 
                 <tbody
                     wire:sortable
