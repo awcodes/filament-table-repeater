@@ -103,6 +103,9 @@
                                                 'filament-table-repeater-column p-2',
                                                 'has-hidden-label' => $cell->isLabelHidden(),
                                             ])
+                                            @if ($columnWidths && isset($columnWidths[$cell->getName()]))
+                                                style="width: {{ $columnWidths[$cell->getName()] }}"
+                                            @endif
                                         >
                                             {{ $cell }}
                                         </td>
@@ -112,7 +115,7 @@
                                 @endforeach
 
                                 @if ($hasActions)
-                                    <td class="filament-table-repeater-column p-2">
+                                    <td class="filament-table-repeater-column p-2 w-px">
                                         <div class="flex items-center md:justify-center">
                                             @unless ($isItemMovementDisabled)
                                                 <button
