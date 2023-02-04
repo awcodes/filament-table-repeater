@@ -2,6 +2,19 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.1.2 - 2023-02-04
+
+### What's Changed
+
+- Can hide the table header by @margarizaldi in https://github.com/awcodes/filament-table-repeater/pull/16
+- Fix: column widths without header row by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/17
+
+### New Contributors
+
+- @margarizaldi made their first contribution in https://github.com/awcodes/filament-table-repeater/pull/16
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.1.1...v1.1.2
+
 ## v1.1.1 - 2023-02-02
 
 ### What's Changed
