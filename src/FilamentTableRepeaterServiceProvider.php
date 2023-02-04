@@ -17,6 +17,7 @@ class FilamentTableRepeaterServiceProvider extends PluginServiceProvider
     {
         $package->name(static::$name)
             ->hasAssets()
+            ->hasTranslations()
             ->hasViews();
     }
 }
