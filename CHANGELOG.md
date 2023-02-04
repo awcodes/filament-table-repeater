@@ -2,6 +2,14 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.1.3 - 2023-02-04
+
+### What's Changed
+
+- Fix: default border radius to match Filament by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/19
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.1.2...v1.1.3
+
 ## v1.1.2 - 2023-02-04
 
 ### What's Changed
