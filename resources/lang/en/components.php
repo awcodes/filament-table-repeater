@@ -3,7 +3,7 @@
 return [
     'repeater' => [
         'empty' => [
-            'label' => 'No records'
+            'label' => 'No records',
         ],
         'row_actions' => [
             'label' => 'Row Actions',
