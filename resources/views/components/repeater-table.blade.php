@@ -61,8 +61,6 @@
                                 ])
                                 @if ($columnWidths && isset($columnWidths[$key]))
                                     style="width: {{ $columnWidths[$key] }}"
-                                @elseif (! $hasContainers)
-                                    style="width: {{ (100 - (10 * intval($hasActions))) / count($headers) }}%"
                                 @endif
                             >
                                 {{ $header }}
