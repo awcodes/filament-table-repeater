@@ -3,10 +3,10 @@
 return [
     'repeater' => [
         'empty' => [
-            'label' => 'No records'
+            'label' => 'Tidak ada data'
         ],
         'row_actions' => [
-            'label' => 'Row Actions',
+            'label' => 'Tindakan',
         ],
     ],
 ];

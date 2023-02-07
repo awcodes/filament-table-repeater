@@ -55,11 +55,9 @@
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
-                                    'filament-table-repeater-header-column p-2 text-left bg-gray-200/50 dark:bg-gray-900/60',
-                                    'ltr:rounded-l-xl rtl:rounded-r-xl' => ! $hasContainers && $loop->first,
-                                    'ltr:rounded-tl-xl rtl:rounded-tr-xl' => $hasContainers && $loop->first,
-                                    'ltr:rounded-r-xl rtl:rounded-l-xl' => ! $hasContainers && $loop->last && ! $hasActions,
-                                    'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $hasContainers && $loop->last && ! $hasActions,
+                                    'filament-table-repeater-header-column px-3 py-2 font-medium text-left text-gray-600 dark:text-gray-300 bg-gray-200/50 dark:bg-gray-900/60',
+                                    'ltr:rounded-tl-xl rtl:rounded-tr-xl' => $loop->first,
+                                    'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $loop->last && ! $hasActions,
                                 ])
                                 @if ($columnWidths && isset($columnWidths[$key]))
                                     style="width: {{ $columnWidths[$key] }}"
@@ -69,11 +67,7 @@
                             </th>
                         @endforeach
                         @if ($hasActions)
-                            <th @class([
-                                'filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px',
-                                'ltr:rounded-r-xl rtl:rounded-l-xl' => ! $hasContainers,
-                                'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $hasContainers,
-                            ])>
+                            <th class="filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px ltr:rounded-tr-xl rtl:rounded-tl-xl">
                                 <span class="sr-only">
                                     {{ __('filament-table-repeater::components.repeater.row_actions.label') }}
                                 </span>
@@ -179,6 +173,17 @@
 
                             </tr>
                         @endforeach
+                    @else
+                        <tr
+                            @class([
+                                'filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300',
+                                'dark:md:divide-gray-700' => config('forms.dark_mode')
+                            ])
+                        >
+                            <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column p-4 w-px text-center italic">
+                                {{ __('filament-table-repeater::components.repeater.empty.label') }}
+                            </td>
+                        </tr>
                     @endif
                 </tbody>
             </table>
