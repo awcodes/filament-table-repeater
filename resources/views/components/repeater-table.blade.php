@@ -49,7 +49,7 @@
                 <thead @class([
                     'sr-only' => $hasHiddenHeader,
                     'filament-table-repeater-header rounded-t-xl overflow-hidden' => ! $hasHiddenHeader,
-                    'border-b border-gray-300 dark:border-gray-700' => ! $hasHiddenHeader && $hasContainers,
+                    'border-b border-gray-300 dark:border-gray-700' => ! $hasHiddenHeader,
                 ])>
                     <tr class="md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700 text-sm">
                         @foreach ($headers as $key => $header)
@@ -68,9 +68,23 @@
                         @endforeach
                         @if ($hasActions)
                             <th class="filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px ltr:rounded-tr-xl rtl:rounded-tl-xl">
-                                <span class="sr-only">
-                                    {{ __('filament-table-repeater::components.repeater.row_actions.label') }}
-                                </span>
+                                <div class="flex items-center md:justify-center">
+                                    @unless ($isItemMovementDisabled)
+                                        <div class="w-8"></div>
+                                    @endunless
+
+                                    @if ($isCloneable)
+                                        <div class="w-8"></div>
+                                    @endunless
+
+                                    @unless ($isItemDeletionDisabled)
+                                        <div class="w-8"></div>
+                                    @endunless
+
+                                    <span class="sr-only">
+                                        {{ __('filament-table-repeater::components.repeater.row_actions.label') }}
+                                    </span>
+                                </div>
                             </th>
                         @endif
                     </tr>
