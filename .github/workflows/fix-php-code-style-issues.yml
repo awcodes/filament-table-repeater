@@ -1,6 +1,9 @@
-name: Fix PHP code style issues
+name: Fix PHP code styling
 
-on: [push]
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
 
 jobs:
   php-code-styling:
@@ -10,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
+          ref: main
 
       - name: Fix PHP code style issues
         uses: aglipanci/laravel-pint-action@2.1.0
