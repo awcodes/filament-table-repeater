@@ -2,6 +2,14 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.2.0 - 2023-02-16
+
+### What's Changed
+
+- Chore: Laravel 10 support and updated workflows by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/23
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.1.4...v1.2.0
+
 ## v1.1.4 - 2023-02-07
 
 ### What's Changed
