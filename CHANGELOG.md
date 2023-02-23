@@ -2,6 +2,15 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.2.1 - 2023-02-23
+
+### What's Changed
+
+- Bump actions/setup-node from 2 to 3 by @dependabot in https://github.com/awcodes/filament-table-repeater/pull/24
+- Fix: hidden labels on radios and checkboxes by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/26
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.2.0...v1.2.1
+
 ## v1.2.0 - 2023-02-16
 
 ### What's Changed
