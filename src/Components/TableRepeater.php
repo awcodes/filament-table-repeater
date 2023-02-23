@@ -50,7 +50,7 @@ class TableRepeater extends Repeater
         }
 
         foreach ($components as $component) {
-            if (method_exists($component, 'disableLabel')) {
+            if (method_exists($component, 'disableLabel') && ! $component instanceof \Filament\Forms\Components\Checkbox) {
                 $component->disableLabel();
             }
         }

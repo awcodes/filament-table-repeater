@@ -4,7 +4,7 @@
     min-width: 100% !important;
 }
 
-.filament-table-repeater-column.has-hidden-label label {
+.filament-table-repeater-column.has-hidden-label label:not(.filament-forms-checkbox-list-component-option-label, .filament-forms-radio-component label) {
     @apply not-sr-only text-sm mb-2 md:sr-only;
 }
 
