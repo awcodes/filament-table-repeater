@@ -14,6 +14,8 @@ class TableRepeater extends Repeater
 
     protected array|Closure $columnWidths = [];
 
+    protected null|string $emptyLabel = null;
+
     protected bool|Closure $showLabels = true;
 
     protected bool|Closure $withoutHeader = false;
@@ -41,6 +43,13 @@ class TableRepeater extends Repeater
         return $this;
     }
 
+    public function emptyLabel(string|Closure $label = null): static
+    {
+        $this->emptyLabel = $label;
+
+        return $this;
+    }
+
     public function getChildComponents(): array
     {
         $components = parent::getChildComponents();
@@ -56,6 +65,11 @@ class TableRepeater extends Repeater
         }
 
         return $components;
+    }
+
+    public function getEmptyLabel(): null|string
+    {
+        return $this->evaluate($this->emptyLabel);
     }
 
     public function getHeaders(): array
