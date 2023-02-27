@@ -58,6 +58,20 @@ TableRepeater::make('social')
     ])
 ```
 
+### Empty State Label
+
+To customize the text shown when the table is empty, use the `->emptyLabel()` method.
+
+```php
+TableRepeater::make('social')
+    ->emptyLabel('There is no platform registered.')
+    ->schema([
+        ...
+    ])
+```
+
+
+
 ### Without Header
 
 Sometimes we don't want to have the table header at all. To achieve this, use the `->withoutHeader()` method.
