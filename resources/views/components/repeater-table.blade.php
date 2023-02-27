@@ -195,7 +195,7 @@
                             ])
                         >
                             <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column p-4 w-px text-center italic">
-                                {{ __('filament-table-repeater::components.repeater.empty.label') }}
+                                {{ $getEmptyLabel() ?? __('filament-table-repeater::components.repeater.empty.label') }}
                             </td>
                         </tr>
                     @endif
