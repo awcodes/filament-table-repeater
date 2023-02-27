@@ -70,8 +70,6 @@ TableRepeater::make('social')
     ])
 ```
 
-
-
 ### Without Header
 
 Sometimes we don't want to have the table header at all. To achieve this, use the `->withoutHeader()` method.
