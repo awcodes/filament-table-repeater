@@ -2,6 +2,15 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.2.2 - 2023-02-27
+
+### What's Changed
+
+- Bump actions/checkout from 2 to 3 by @dependabot in https://github.com/awcodes/filament-table-repeater/pull/28
+- Add Feature: Able to customize empty state label by @margarizaldi in https://github.com/awcodes/filament-table-repeater/pull/27
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.2.1...v1.2.2
+
 ## v1.2.1 - 2023-02-23
 
 ### What's Changed
