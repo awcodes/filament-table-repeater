@@ -70,8 +70,6 @@ class TableRepeater extends Repeater
     public function getEmptyLabel(): null|string
     {
         return $this->evaluate($this->emptyLabel);
-
-        return $this;
     }
 
     public function getHeaders(): array
