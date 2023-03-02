@@ -14,7 +14,7 @@ class TableRepeater extends Repeater
 
     protected array|Closure $columnWidths = [];
 
-    protected null|string $emptyLabel = null;
+    protected null|string|Closure $emptyLabel = null;
 
     protected bool|Closure $showLabels = true;
 
