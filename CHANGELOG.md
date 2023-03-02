@@ -2,6 +2,18 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.2.3 - 2023-03-02
+
+### What's Changed
+
+- fix: add missing `emptyLabel` closure type by @salimabsi in https://github.com/awcodes/filament-table-repeater/pull/29
+
+### New Contributors
+
+- @salimabsi made their first contribution in https://github.com/awcodes/filament-table-repeater/pull/29
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.2.2...v1.2.3
+
 ## v1.2.2 - 2023-02-27
 
 ### What's Changed
