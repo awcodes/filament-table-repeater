@@ -2,6 +2,15 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.2.4 - 2023-03-20
+
+### What's Changed
+
+- Fix: hidden file upload label by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/32
+- Chore: match button style by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/32
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.2.3...v1.2.4
+
 ## v1.2.3 - 2023-03-02
 
 ### What's Changed
