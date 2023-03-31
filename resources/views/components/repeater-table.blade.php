@@ -1,28 +1,25 @@
 <x-dynamic-component
     :component="$getFieldWrapperView()"
-    :id="$getId()"
-    :label="$getLabel()"
-    :label-sr-only="$isLabelHidden()"
-    :helper-text="$getHelperText()"
-    :hint="$getHint()"
-    :hint-icon="$getHintIcon()"
-    :required="$isRequired()"
-    :state-path="$getStatePath()"
+    :field="$field"
 >
     @php
         $containers = $getChildComponentContainers();
 
+        $addAction = $getAction($getAddActionName());
+        $cloneAction = $getAction($getCloneActionName());
+        $deleteAction = $getAction($getDeleteActionName());
+        $reorderAction = $getAction($getReorderActionName());
+
         $isCloneable = $isCloneable();
-        $isItemCreationDisabled = $isItemCreationDisabled();
-        $isItemDeletionDisabled = $isItemDeletionDisabled();
-        $isItemMovementDisabled = $isItemMovementDisabled();
         $headers = $getHeaders();
         $columnWidths = $getColumnWidths();
         $breakPoint = $getBreakPoint();
         $hasContainers = count($containers) > 0;
         $hasHiddenHeader = $shouldHideHeader();
 
-        $hasActions = (! $isItemMovementDisabled) || (! $isItemDeletionDisabled) || $isCloneable;
+        $hasActions = $reorderAction || $deleteAction || $cloneAction;
+
+        $statePath = $getStatePath();
     @endphp
 
     <div {{ $attributes->merge($getExtraAttributes())->class([
@@ -45,7 +42,7 @@
             'xl:border xl:border-gray-300 dark:xl:border-gray-700' => ! $hasContainers && $breakPoint === 'xl',
             '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => ! $hasContainers && $breakPoint === '2xl',
         ])>
-            <table class="w-full">
+            <table x-data="{}" class="w-full">
                 <thead @class([
                     'sr-only' => $hasHiddenHeader,
                     'filament-table-repeater-header rounded-t-xl overflow-hidden' => ! $hasHiddenHeader,
@@ -69,15 +66,15 @@
                         @if ($hasActions)
                             <th class="filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px ltr:rounded-tr-xl rtl:rounded-tl-xl">
                                 <div class="flex items-center md:justify-center">
-                                    @unless ($isItemMovementDisabled)
+                                    @unless ($reorderAction)
                                         <div class="w-8"></div>
                                     @endunless
 
-                                    @if ($isCloneable)
+                                    @if ($cloneAction)
                                         <div class="w-8"></div>
                                     @endunless
 
-                                    @unless ($isItemDeletionDisabled)
+                                    @unless ($deleteAction)
                                         <div class="w-8"></div>
                                     @endunless
 
@@ -90,19 +87,16 @@
                     </tr>
                 </thead>
                 <tbody
-                    wire:sortable
-                    wire:end.stop="dispatchFormEvent('repeater::moveItems', '{{ $getStatePath() }}', $event.target.sortable.toArray())"
-                    class="filament-table-repeater-rows-wrapper divide-y divide-gray-300 dark:divide-gray-700"
+                    x-sortable
+                    wire:end.stop="{{ 'mountFormComponentAction(\'' . $statePath . '\', \'reorder\', { items: $event.target.sortable.toArray() })' }}"
+                    class="filament-table-repeater-body md:divide-y md:divide-gray-300 md:dark:divide-gray-700"
                 >
                     @if (count($containers))
                         @foreach ($containers as $uuid => $row)
                             <tr
-                                wire:key="{{ $this->id }}.{{ $row->getStatePath() }}.item"
-                                wire:sortable.item="{{ $uuid }}"
-                                @class([
-                                    'filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300',
-                                    'dark:md:divide-gray-700' => config('forms.dark_mode')
-                                ])
+                                wire:key="{{ $this->id }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
+                                x-sortable-item="{{ $uuid }}"
+                                class="filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700"
                             >
                                 @foreach($row->getComponents() as $cell)
                                     @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
@@ -125,62 +119,23 @@
                                 @if ($hasActions)
                                     <td class="filament-table-repeater-column p-2 w-px">
                                         <div class="flex items-center md:justify-center">
-                                            @unless ($isItemMovementDisabled)
-                                                <button
-                                                    title="{{ __('forms::components.repeater.buttons.move_item.label') }}"
-                                                    x-on:click.stop
-                                                    wire:sortable.handle
-                                                    wire:keydown.prevent.arrow-up="dispatchFormEvent('repeater::moveItemUp', '{{ $getStatePath() }}', '{{ $uuid }}')"
-                                                    wire:keydown.prevent.arrow-down="dispatchFormEvent('repeater::moveItemDown', '{{ $getStatePath() }}', '{{ $uuid }}')"
-                                                    type="button"
-                                                    @class([
-                                                        'flex items-center justify-center flex-none w-8 h-8 text-gray-400 transition hover:text-gray-500',
-                                                        'dark:border-gray-700' => config('forms.dark_mode'),
-                                                    ])
-                                                >
-                                                    <span class="sr-only">
-                                                        {{ __('forms::components.repeater.buttons.move_item.label') }}
-                                                    </span>
+                                            @if ($reorderAction)
+                                                <div x-sortable-handle>
+                                                    {{ $reorderAction }}
+                                                </div>
+                                            @endif
 
-                                                    <x-heroicon-s-switch-vertical class="w-5 h-5 md:!w-4 md:!h-4"/>
-                                                </button>
-                                            @endunless
+                                            @if ($cloneAction)
+                                                <li class="flex items-center justify-center">
+                                                    {{ $cloneAction(['item' => $uuid]) }}
+                                                </li>
+                                            @endif
 
-                                            @if ($isCloneable)
-                                                <button
-                                                    title="{{ __('forms::components.repeater.buttons.clone_item.label') }}"
-                                                    wire:click="dispatchFormEvent('repeater::cloneItem', '{{ $getStatePath() }}', '{{ $uuid }}')"
-                                                    type="button"
-                                                    @class([
-                                                        'flex items-center justify-center flex-none w-8 h-8 text-gray-400 transition hover:text-gray-500',
-                                                        'dark:border-gray-700' => config('forms.dark_mode'),
-                                                    ])
-                                                >
-                                                    <span class="sr-only">
-                                                        {{ __('forms::components.repeater.buttons.clone_item.label') }}
-                                                    </span>
-
-                                                    <x-heroicon-s-duplicate class="w-5 h-5 md:!w-4 md:!h-4"/>
-                                                </button>
-                                            @endunless
-
-                                            @unless ($isItemDeletionDisabled)
-                                                <button
-                                                    title="{{ __('forms::components.repeater.buttons.delete_item.label') }}"
-                                                    wire:click.stop="dispatchFormEvent('repeater::deleteItem', '{{ $getStatePath() }}', '{{ $uuid }}')"
-                                                    type="button"
-                                                    @class([
-                                                        'flex items-center justify-center flex-none w-8 h-8 text-danger-600 transition hover:text-danger-500',
-                                                        'dark:text-danger-500 dark:hover:text-danger-400' => config('forms.dark_mode'),
-                                                    ])
-                                                >
-                                                    <span class="sr-only">
-                                                        {{ __('forms::components.repeater.buttons.delete_item.label') }}
-                                                    </span>
-
-                                                    <x-heroicon-s-trash class="w-5 h-5 md:!w-4 md:!h-4"/>
-                                                </button>
-                                            @endunless
+                                            @if ($deleteAction)
+                                                <li class="flex items-center justify-center">
+                                                    {{ $deleteAction(['item' => $uuid]) }}
+                                                </li>
+                                            @endif
                                         </div>
                                     </td>
                                 @endif
@@ -189,10 +144,7 @@
                         @endforeach
                     @else
                         <tr
-                            @class([
-                                'filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300',
-                                'dark:md:divide-gray-700' => config('forms.dark_mode')
-                            ])
+                            class="filament-table-repeater-row md:divide-x md:divide-y md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700"
                         >
                             <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column p-4 w-px text-center italic">
                                 {{ $getEmptyLabel() ?? __('filament-table-repeater::components.repeater.empty.label') }}
@@ -203,16 +155,9 @@
             </table>
         </div>
 
-        @if (! $isItemCreationDisabled)
+        @if ($addAction)
             <div class="relative flex justify-center">
-                <x-forms::button
-                    :wire:click="'dispatchFormEvent(\'repeater::createItem\', \'' . $getStatePath() . '\')'"
-                    size="sm"
-                    type="button"
-                    outlined
-                >
-                    {{ $getCreateItemButtonLabel() }}
-                </x-forms::button>
+                {{ $addAction }}
             </div>
         @endif
     </div>
