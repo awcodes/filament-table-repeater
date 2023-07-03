@@ -2,6 +2,14 @@
 
 All notable changes to `filament-table-repeater` will be documented in this file.
 
+## v1.2.5 - 2023-07-03
+
+### What's Changed
+
+- Fix: make headers show required in table layout by @awcodes in https://github.com/awcodes/filament-table-repeater/pull/45
+
+**Full Changelog**: https://github.com/awcodes/filament-table-repeater/compare/v1.2.4...v1.2.5
+
 ## v1.2.4 - 2023-03-20
 
 ### What's Changed
