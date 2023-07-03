@@ -59,11 +59,16 @@
                                     'ltr:rounded-tl-xl rtl:rounded-tr-xl' => $loop->first,
                                     'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $loop->last && ! $hasActions,
                                 ])
-                                @if ($columnWidths && isset($columnWidths[$key]))
-                                    style="width: {{ $columnWidths[$key] }}"
+                                @if ($header['width'])
+                                    style="width: {{ $header['width'] }}"
                                 @endif
                             >
-                                {{ $header }}
+                                {{ $header['label'] }}
+                                @if ($header['required'])
+                                    <span class="whitespace-nowrap">
+                                        <sup class="font-medium text-danger-700 dark:text-danger-400">*</sup>
+                                    </span>
+                                @endif
                             </th>
                         @endforeach
                         @if ($hasActions)
