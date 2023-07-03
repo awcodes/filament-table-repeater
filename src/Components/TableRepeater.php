@@ -8,23 +8,23 @@ use Filament\Forms\Components\Repeater;
 
 class TableRepeater extends Repeater
 {
-    protected string $view = 'filament-table-repeater::components.repeater-table';
-
-    protected Closure|array $headers = [];
+    protected string $breakPoint = 'md';
 
     protected array|Closure $columnWidths = [];
 
     protected null|string|Closure $emptyLabel = null;
 
+    protected Closure|array $headers = [];
+
     protected bool|Closure $showLabels = true;
+
+    protected string $view = 'filament-table-repeater::components.repeater-table';
 
     protected bool|Closure $withoutHeader = false;
 
-    protected string $breakPoint = 'md';
-
-    public function headers(array|Closure $headers): static
+    public function breakPoint(string $breakPoint = 'md'): static
     {
-        $this->headers = $headers;
+        $this->breakPoint = $breakPoint;
 
         return $this;
     }
@@ -36,18 +36,21 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    public function breakPoint(string $breakPoint = 'md'): static
-    {
-        $this->breakPoint = $breakPoint;
-
-        return $this;
-    }
-
     public function emptyLabel(string|Closure $label = null): static
     {
         $this->emptyLabel = $label;
 
         return $this;
+    }
+
+    public function getBreakPoint(): string
+    {
+        return $this->breakPoint;
+    }
+
+    public function getColumnWidths(): array
+    {
+        return $this->evaluate($this->columnWidths);
     }
 
     public function getChildComponents(): array
@@ -76,14 +79,20 @@ class TableRepeater extends Repeater
     {
         $mergedHeaders = [];
 
+        $customHeaders = $this->evaluate($this->headers);
+
         foreach ($this->getChildComponents() as $key => $field) {
             if ($field instanceof Hidden || $field->isHidden()) {
                 continue;
             }
 
-            $customHeaders = $this->evaluate($this->headers);
+            $item = [
+                'label' => $customHeaders[$key] ?? $field->getLabel(),
+                'width' => $this->getColumnWidths()[$key] ?? null,
+                'required' => $field->isRequired(),
+            ];
 
-            $mergedHeaders[method_exists($field, 'getName') ? $field->getName() : $field->getId()] = $customHeaders[$key] ?? $field->getLabel();
+            $mergedHeaders[method_exists($field, 'getName') ? $field->getName() : $field->getId()] = $item;
         }
 
         $this->headers = $mergedHeaders;
@@ -91,21 +100,11 @@ class TableRepeater extends Repeater
         return $this->evaluate($this->headers);
     }
 
-    public function showLabels(bool|Closure $show = true): static
+    public function headers(array|Closure $headers): static
     {
-        $this->showLabels = $show;
+        $this->headers = $headers;
 
         return $this;
-    }
-
-    public function getColumnWidths(): array
-    {
-        return $this->evaluate($this->columnWidths);
-    }
-
-    public function getBreakPoint(): string
-    {
-        return $this->breakPoint;
     }
 
     public function hideLabels(): static
@@ -120,15 +119,22 @@ class TableRepeater extends Repeater
         return $this->evaluate($this->showLabels);
     }
 
+    public function shouldHideHeader(): bool
+    {
+        return $this->evaluate($this->withoutHeader);
+    }
+
+    public function showLabels(bool|Closure $show = true): static
+    {
+        $this->showLabels = $show;
+
+        return $this;
+    }
+
     public function withoutHeader(bool|Closure $condition = true): static
     {
         $this->withoutHeader = $condition;
 
         return $this;
-    }
-
-    public function shouldHideHeader(): bool
-    {
-        return $this->evaluate($this->withoutHeader);
     }
 }
