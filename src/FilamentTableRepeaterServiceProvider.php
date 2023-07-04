@@ -2,22 +2,27 @@
 
 namespace Awcodes\FilamentTableRepeater;
 
-use Filament\PluginServiceProvider;
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentTableRepeaterServiceProvider extends PluginServiceProvider
+class FilamentTableRepeaterServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-table-repeater';
-
-    protected array $styles = [
-        'filament-table-repeater' => __DIR__ . '/../resources/dist/filament-table-repeater.css',
-    ];
-
     public function configurePackage(Package $package): void
     {
-        $package->name(static::$name)
+        $package->name('filament-table-repeater')
             ->hasAssets()
             ->hasTranslations()
             ->hasViews();
+    }
+
+    public function packageRegistered(): void
+    {
+        parent::packageRegistered();
+
+        FilamentAsset::register([
+            Css::make('filament-table-repeater', __DIR__ . '/../resources/dist/filament-table-repeater.css')
+        ], 'awcodes/filament-table-repeater');
     }
 }
