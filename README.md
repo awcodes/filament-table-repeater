@@ -1,7 +1,6 @@
 # Filament Table Repeater Plugin
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/awcodes/filament-table-repeater/Check%20&%20fix%20styling?label=code%20style)](https://github.com/awcodes/filament-table-repeater/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 
 ![screenshot in dark mode](./images/dark-mode.jpg)
@@ -35,7 +34,7 @@ TableRepeater::make('social')
     ->columnSpan('full')
 ```
 
-By default, Table Repeater will automatically create the table headers from your schema labels. This can be overridden by simply passing an array of your desired headers to the `->headers()` method.
+By default, Table Repeater will automatically create the table headers from your schema labels. This can be overridden by simply passing an array of your desired headers to the `headers()` method.
 
 ```php
 TableRepeater::make('social')
@@ -48,7 +47,7 @@ TableRepeater::make('social')
 
 ### Labels
 
-To automatically hide all the labels of the fields in the table use the `->hideLabels()` method.
+To automatically hide all the labels of the fields in the table use the `hideLabels()` method.
 
 ```php
 TableRepeater::make('social')
@@ -60,7 +59,7 @@ TableRepeater::make('social')
 
 ### Empty State Label
 
-To customize the text shown when the table is empty, use the `->emptyLabel()` method.
+To customize the text shown when the table is empty, use the `emptyLabel()` method.
 
 ```php
 TableRepeater::make('social')
@@ -72,7 +71,7 @@ TableRepeater::make('social')
 
 ### Without Header
 
-Sometimes we don't want to have the table header at all. To achieve this, use the `->withoutHeader()` method.
+Sometimes we don't want to have the table header at all. To achieve this, use the `withoutHeader()` method.
 
 ```php
 TableRepeater::make('social')

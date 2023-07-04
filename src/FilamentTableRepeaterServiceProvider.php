@@ -21,8 +21,10 @@ class FilamentTableRepeaterServiceProvider extends PackageServiceProvider
     {
         parent::packageRegistered();
 
-        FilamentAsset::register([
-            Css::make('filament-table-repeater', __DIR__ . '/../resources/dist/filament-table-repeater.css')
-        ], 'awcodes/filament-table-repeater');
+        if (app()->runningInConsole()) {
+            FilamentAsset::register([
+                Css::make('filament-table-repeater', __DIR__ . '/../resources/dist/filament-table-repeater.css')
+            ], 'awcodes/filament-table-repeater');
+        }
     }
 }

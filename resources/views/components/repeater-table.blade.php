@@ -19,16 +19,20 @@
         $hasActions = $reorderAction || $moveUpAction || $moveDownAction || $cloneAction || $deleteAction;
     @endphp
 
-    <div {{ $attributes->merge($getExtraAttributes())->class([
-        'filament-table-repeater-component space-y-6 relative',
-        match ($breakPoint) {
-            'sm' => 'break-point-sm',
-            'lg' => 'break-point-lg',
-            'xl' => 'break-point-xl',
-            '2xl' => 'break-point-2xl',
-            default => 'break-point-md',
-        }
-    ]) }}>
+    <div
+        x-data="{}"
+        x-load-css="['{{ asset('css/awcodes/filament-table-repeater/filament-table-repeater.css') }}']"
+        {{ $attributes->merge($getExtraAttributes())->class([
+            'filament-table-repeater-component space-y-6 relative',
+            match ($breakPoint) {
+                'sm' => 'break-point-sm',
+                'lg' => 'break-point-lg',
+                'xl' => 'break-point-xl',
+                '2xl' => 'break-point-2xl',
+                default => 'break-point-md',
+            }
+        ]) }}
+    >
 
         <div @class([
             'filament-table-repeater-container rounded-xl bg-gray-50 relative dark:bg-gray-500/10',
@@ -39,7 +43,7 @@
             'xl:border xl:border-gray-300 dark:xl:border-gray-700' => ! $hasContainers && $breakPoint === 'xl',
             '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => ! $hasContainers && $breakPoint === '2xl',
         ])>
-            <table class="w-full" x-data="{}">
+            <table class="w-full">
                 <thead @class([
                     'sr-only' => $hasHiddenHeader,
                     'filament-table-repeater-header rounded-t-xl overflow-hidden' => ! $hasHiddenHeader,
