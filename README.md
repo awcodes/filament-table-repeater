@@ -3,6 +3,8 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 
+![table-repeater-og](https://github.com/awcodes/filament-table-repeater/assets/3596800/b4963e23-800a-40d5-b62a-bb89ae1b2127)
+
 ## Installation
 
 You can install the package via composer:
