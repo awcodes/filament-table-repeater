@@ -1,4 +1,4 @@
-name: Build Assets
+name: "Build Assets"
 
 on:
   pull_request:

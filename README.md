@@ -3,9 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 
-![screenshot in dark mode](./images/dark-mode.jpg)
-![screenshot in light mode](./images/light-mode.jpg)
-
 ## Installation
 
 You can install the package via composer:
@@ -110,17 +107,6 @@ TableRepeater::make('social')
         Select::make('platform'),
         TextInput::make('handle'),
     ])
-```
-
-## Theming
-
-If you are using a custom theme for Filament you will need to add this plugin's views to your Tailwind CSS config.
-
-```js
-content: [
-    ...
-    "./vendor/awcodes/filament-table-repeater/resources/views/**/*.blade.php",
-],
 ```
 
 ## Changelog

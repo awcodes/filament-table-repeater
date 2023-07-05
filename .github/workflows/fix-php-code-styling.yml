@@ -1,4 +1,4 @@
-name: Fix PHP code styling
+name: "Fix PHP code styling"
 
 on:
   pull_request:
