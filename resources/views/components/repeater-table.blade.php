@@ -16,7 +16,7 @@
         $hasHiddenHeader = $shouldHideHeader();
         $statePath = $getStatePath();
 
-        $hasActions = $reorderAction || $moveUpAction || $moveDownAction || $cloneAction || $deleteAction;
+        $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction || $moveDownAction;
     @endphp
 
     <div
@@ -72,7 +72,7 @@
                         @if ($hasActions)
                             <th class="filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px ltr:rounded-tr-xl rtl:rounded-tl-xl">
                                 <div class="flex items-center md:justify-center">
-                                    @if ($reorderAction)
+                                    @if ($reorderAction->isVisible())
                                         <div class="w-8"></div>
                                     @endif
 
@@ -86,11 +86,11 @@
                                         @endif
                                     @endif
 
-                                    @if ($cloneAction)
+                                    @if ($cloneAction->isVisible())
                                         <div class="w-8"></div>
                                     @endif
 
-                                    @if ($deleteAction)
+                                    @if ($deleteAction->isVisible())
                                         <div class="w-8"></div>
                                     @endif
 
@@ -135,7 +135,7 @@
                                 @if ($hasActions)
                                     <td class="filament-table-repeater-column p-2 w-px">
                                         <div class="flex items-center md:justify-center">
-                                            @if ($reorderAction)
+                                            @if ($reorderAction->isVisible())
                                                 <div x-sortable-handle>
                                                     {{ $reorderAction }}
                                                 </div>
@@ -151,11 +151,11 @@
                                                 @endif
                                             @endif
 
-                                            @if ($cloneAction)
+                                            @if ($cloneAction->isVisible())
                                                 {{ $cloneAction(['item' => $uuid]) }}
                                             @endif
 
-                                            @if ($deleteAction)
+                                            @if ($deleteAction->isVisible())
                                                 {{ $deleteAction(['item' => $uuid]) }}
                                             @endif
                                         </div>
