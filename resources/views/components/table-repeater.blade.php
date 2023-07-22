@@ -9,6 +9,7 @@
         $moveUpAction = $getAction($getMoveUpActionName());
         $reorderAction = $getAction($getReorderActionName());
         $isReorderableWithButtons = $isReorderableWithButtons();
+
         $headers = $getHeaders();
         $columnWidths = $getColumnWidths();
         $breakPoint = $getBreakPoint();
@@ -35,25 +36,25 @@
     >
 
         <div @class([
-            'filament-table-repeater-container rounded-xl bg-gray-50 relative dark:bg-gray-500/10',
-            'border border-gray-300 dark:border-gray-700' => $hasContainers,
-            'sm:border sm:border-gray-300 dark:sm:border-gray-700' => ! $hasContainers && $breakPoint === 'sm',
-            'md:border md:border-gray-300 dark:md:border-gray-700' => ! $hasContainers && $breakPoint === 'md',
-            'lg:border lg:border-gray-300 dark:lg:border-gray-700' => ! $hasContainers && $breakPoint === 'lg',
-            'xl:border xl:border-gray-300 dark:xl:border-gray-700' => ! $hasContainers && $breakPoint === 'xl',
-            '2xl:border 2xl:border-gray-300 dark:2xl:border-gray-700' => ! $hasContainers && $breakPoint === '2xl',
+            'filament-table-repeater-container rounded-xl relative ring-1',
+            'ring-gray-950/5 dark:ring-white/20' => $hasContainers,
+            'sm:ring-gray-950/5 dark:sm:ring-white/20' => ! $hasContainers && $breakPoint === 'sm',
+            'md:ring-gray-950/5 dark:md:ring-white/20' => ! $hasContainers && $breakPoint === 'md',
+            'lg:ring-gray-950/5 dark:lg:ring-white/20' => ! $hasContainers && $breakPoint === 'lg',
+            'xl:ring-gray-950/5 dark:xl:ring-white/20' => ! $hasContainers && $breakPoint === 'xl',
+            '2xl:ring-gray-950/5 dark:2xl:ring-white/20' => ! $hasContainers && $breakPoint === '2xl',
         ])>
             <table class="w-full">
                 <thead @class([
                     'sr-only' => $hasHiddenHeader,
                     'filament-table-repeater-header rounded-t-xl overflow-hidden' => ! $hasHiddenHeader,
-                    'border-b border-gray-300 dark:border-gray-700' => ! $hasHiddenHeader,
+                    'border-b border-gray-950/5 dark:border-white/20' => ! $hasHiddenHeader,
                 ])>
-                    <tr class="md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700 text-sm">
+                    <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
-                                    'filament-table-repeater-header-column px-3 py-2 font-medium text-left text-gray-600 dark:text-gray-300 bg-gray-200/50 dark:bg-gray-900/60',
+                                    'filament-table-repeater-header-column px-3 py-2 font-medium text-left bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
                                     'ltr:rounded-tl-xl rtl:rounded-tr-xl' => $loop->first,
                                     'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $loop->last && ! $hasActions,
                                 ])
@@ -70,7 +71,7 @@
                             </th>
                         @endforeach
                         @if ($hasActions)
-                            <th class="filament-table-repeater-header-column p-2 bg-gray-200/50 dark:bg-gray-900/60 w-px ltr:rounded-tr-xl rtl:rounded-tl-xl">
+                            <th class="filament-table-repeater-header-column w-px ltr:rounded-tr-xl rtl:rounded-tl-xl p-2 bg-gray-100 dark:bg-gray-900/60">
                                 <div class="flex items-center md:justify-center">
                                     @if ($reorderAction->isVisible())
                                         <div class="w-8"></div>
@@ -105,14 +106,13 @@
                 <tbody
                     x-sortable
                     wire:end.stop="{{ 'mountFormComponentAction(\'' . $statePath . '\', \'reorder\', { items: $event.target.sortable.toArray() })' }}"
-                    class="filament-table-repeater-rows-wrapper divide-y divide-gray-300 dark:divide-gray-700"
+                    class="filament-table-repeater-rows-wrapper divide-y divide-gray-950/5 dark:divide-white/20"
                 >
                     @if (count($containers))
                         @foreach ($containers as $uuid => $row)
                             <tr
-                                wire:key="{{ $this->id }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                 x-sortable-item="{{ $uuid }}"
-                                class="filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700"
+                                class="filament-table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
                             >
                                 @foreach($row->getComponents() as $cell)
                                     @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
@@ -165,7 +165,7 @@
                             </tr>
                         @endforeach
                     @else
-                        <tr class="filament-table-repeater-row md:divide-x md:rtl:divide-x-reverse md:divide-gray-300 dark:md:divide-gray-700">
+                        <tr class="filament-table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
                             <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column p-4 w-px text-center italic">
                                 {{ $getEmptyLabel() ?? __('filament-table-repeater::components.repeater.empty.label') }}
                             </td>

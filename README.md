@@ -1,4 +1,4 @@
-# Filament Table Repeater Plugin
+# Table Repeater Plugin
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
 [![Total Downloads](https://img.shields.io/packagist/dt/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
@@ -10,12 +10,31 @@
 You can install the package via composer:
 
 ```bash
-composer require awcodes/filament-table-repeater
+composer require awcodes/filament-table-repeater:"^2.0" --dev
+```
+
+In an effort to align with Filament's theming methodology you will need to use a custom theme to use this plugin.
+
+> **Note**
+> If you have not set up a custom theme and are using a Panel follow the instructions in the [Filament Docs](https://filamentphp.com/docs/3.x/panels/themes#creating-a-custom-theme) first. The following applies to both the Panels Package and the standalone Forms package.
+
+1. Import the plugin's stylesheet in your theme's css file.
+
+```css
+@import '<path-to-vendor>/vendor/awcodes/filament-table-repeater/resources/css/plugin.css';
+```
+
+2. Add the plugin's views to your `tailwind.config.js` file.
+
+```js
+content: [
+    '<path-to-vendor>/awcodes/filament-table-repeater/resources/**/*.blade.php',
+]
 ```
 
 ## Usage
 
-This field has most of the same functionality of the [Filament Repeater](https://filamentphp.com/docs/2.x/forms/fields#repeater) field. The main exception is that this field can not be collapsed.
+This field has most of the same functionality of the [Filament Forms Repeater](https://filamentphp.com/docs/2.x/forms/fields#repeater) field. The main exception is that this field can not be collapsed.
 
 ```php
 TableRepeater::make('social')
@@ -38,10 +57,6 @@ By default, Table Repeater will automatically create the table headers from your
 ```php
 TableRepeater::make('social')
     ->headers(['Platform', 'Handle'])
-    ->schema([
-        ...
-    ])
-    ->columnSpan('full')
 ```
 
 ### Labels
@@ -51,9 +66,6 @@ To automatically hide all the labels of the fields in the table use the `hideLab
 ```php
 TableRepeater::make('social')
     ->hideLabels()
-    ->schema([
-        ...
-    ])
 ```
 
 ### Empty State Label
@@ -63,9 +75,6 @@ To customize the text shown when the table is empty, use the `emptyLabel()` meth
 ```php
 TableRepeater::make('social')
     ->emptyLabel('There is no platform registered.')
-    ->schema([
-        ...
-    ])
 ```
 
 ### Without Header
@@ -75,9 +84,6 @@ Sometimes we don't want to have the table header at all. To achieve this, use th
 ```php
 TableRepeater::make('social')
     ->withoutHeader()
-    ->schema([
-        ...
-    ])
 ```
 
 ### Column Widths
@@ -105,10 +111,6 @@ can be overridden with the `breakPoint()` method.
 ```php
 TableRepeater::make('social')
     ->breakPoint('sm') // accepts Tailwind CSS screen sizes
-    ->schema([
-        Select::make('platform'),
-        TextInput::make('handle'),
-    ])
 ```
 
 ## Changelog

@@ -5,6 +5,7 @@ namespace Awcodes\FilamentTableRepeater\Components;
 use Closure;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Placeholder;
 
 class TableRepeater extends Repeater
 {
@@ -18,7 +19,7 @@ class TableRepeater extends Repeater
 
     protected bool|Closure $showLabels = true;
 
-    protected string $view = 'filament-table-repeater::components.repeater-table';
+    protected string $view = 'filament-table-repeater::components.table-repeater';
 
     protected bool|Closure $withoutHeader = false;
 
@@ -62,7 +63,10 @@ class TableRepeater extends Repeater
         }
 
         foreach ($components as $component) {
-            if (method_exists($component, 'hiddenLabel') && ! $component instanceof \Filament\Forms\Components\Checkbox) {
+            if (
+                method_exists($component, 'hiddenLabel') &&
+                ! $component instanceof Placeholder
+            ) {
                 $component->hiddenLabel();
             }
         }
