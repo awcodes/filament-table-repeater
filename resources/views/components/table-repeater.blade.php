@@ -21,8 +21,6 @@
     @endphp
 
     <div
-        x-data="{}"
-        x-load-css="['{{ asset('css/awcodes/filament-table-repeater/filament-table-repeater.css') }}']"
         {{ $attributes->merge($getExtraAttributes())->class([
             'filament-table-repeater-component space-y-6 relative',
             match ($breakPoint) {
