@@ -173,7 +173,7 @@
             </table>
         </div>
 
-        @if ($addAction)
+        @if ($addAction->isVisible())
             <div class="relative flex justify-center">
                 {{ $addAction }}
             </div>
