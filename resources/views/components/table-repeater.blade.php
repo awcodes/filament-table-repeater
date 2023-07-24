@@ -17,7 +17,7 @@
         $hasHiddenHeader = $shouldHideHeader();
         $statePath = $getStatePath();
 
-        $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction || $moveDownAction;
+        $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction->isVisible() || $moveDownAction->isVisible();
     @endphp
 
     <div
