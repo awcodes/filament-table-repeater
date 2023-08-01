@@ -10,7 +10,7 @@
 You can install the package via composer:
 
 ```bash
-composer require awcodes/filament-table-repeater:"^2.0" --dev
+composer require awcodes/filament-table-repeater
 ```
 
 In an effort to align with Filament's theming methodology you will need to use a custom theme to use this plugin.
