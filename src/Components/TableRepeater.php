@@ -4,8 +4,8 @@ namespace Awcodes\FilamentTableRepeater\Components;
 
 use Closure;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
 
 class TableRepeater extends Repeater
 {
@@ -74,7 +74,7 @@ class TableRepeater extends Repeater
         return $components;
     }
 
-    public function getEmptyLabel(): null|string
+    public function getEmptyLabel(): ?string
     {
         return $this->evaluate($this->emptyLabel);
     }
