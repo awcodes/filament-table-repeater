@@ -34,7 +34,7 @@
     >
 
         <div @class([
-            'filament-table-repeater-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20',
+            'filament-table-repeater-container rounded-xl relative overflow-hidden ring-1 ring-gray-950/5 dark:ring-white/20',
             'sm:ring-gray-950/5 dark:sm:ring-white/20' => ! $hasContainers && $breakPoint === 'sm',
             'md:ring-gray-950/5 dark:md:ring-white/20' => ! $hasContainers && $breakPoint === 'md',
             'lg:ring-gray-950/5 dark:lg:ring-white/20' => ! $hasContainers && $breakPoint === 'lg',
