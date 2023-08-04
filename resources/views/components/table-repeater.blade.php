@@ -44,8 +44,7 @@
             <table class="w-full">
                 <thead @class([
                     'sr-only' => $hasHiddenHeader,
-                    'filament-table-repeater-header rounded-t-xl overflow-hidden' => ! $hasHiddenHeader,
-                    'border-b border-gray-950/5 dark:border-white/20' => ! $hasHiddenHeader,
+                    'filament-table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => ! $hasHiddenHeader,
                 ])>
                     <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
                         @foreach ($headers as $key => $header)
