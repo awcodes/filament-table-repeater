@@ -85,10 +85,12 @@ class TableRepeater extends Repeater
 
         $customHeaders = $this->evaluate($this->headers);
 
-        foreach ($this->getChildComponents() as $key => $field) {
+        foreach ($this->getChildComponents() as $field) {
             if ($field instanceof Hidden || $field->isHidden()) {
                 continue;
             }
+
+            $key = method_exists($field, 'getName') ? $field->getName() : $field->getId();
 
             $item = [
                 'label' => $customHeaders[$key] ?? $field->getLabel(),

@@ -89,16 +89,20 @@ TableRepeater::make('social')
 ### Column Widths
 
 To set the width of columns in the table use the `columnWidths()` method. 
-Widths should be set in px as a string. 
+Widths should be set in px as a string. For fields that don't have names, such as `Actions` and `Group`, you have to give it an explicit id to target. 
 
 ```php
 TableRepeater::make('social')
     ->columnWidths([
         'platform' => '200px',
+        'action_field' => '100px',
     ])
     ->schema([
         Select::make('platform'), // will be 200px wide
         TextInput::make('handle'), // will be default stretched width
+        Actions::make([
+            ...
+        ])->id('action_field'), // will be 100px wide
     ])
 ```
 

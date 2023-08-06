@@ -117,8 +117,14 @@
                                                 'filament-table-repeater-column p-2',
                                                 'has-hidden-label' => $cell->isLabelHidden(),
                                             ])
-                                            @if ($columnWidths && isset($columnWidths[$cell->getName()]))
-                                                style="width: {{ $columnWidths[$cell->getName()] }}"
+                                            @php
+                                                $cellKey = method_exists($cell, 'getName') ? $cell->getName() : $cell->getId();
+                                            @endphp
+                                            @if (
+                                                $columnWidths &&
+                                                isset($columnWidths[$cellKey])
+                                            )
+                                                style="width: {{ $columnWidths[$cellKey] }}"
                                             @endif
                                         >
                                             {{ $cell }}
