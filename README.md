@@ -77,6 +77,8 @@ TableRepeater::make('social')
     ->emptyLabel('There is no platform registered.')
 ```
 
+Alternatively, you can hide the empty label with `emptyLabel(false)`.
+
 ### Without Header
 
 Sometimes we don't want to have the table header at all. To achieve this, use the `withoutHeader()` method.
