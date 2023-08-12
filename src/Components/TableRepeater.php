@@ -13,7 +13,7 @@ class TableRepeater extends Repeater
 
     protected array|Closure $columnWidths = [];
 
-    protected null|string|Closure $emptyLabel = null;
+    protected null|bool|string|Closure $emptyLabel = null;
 
     protected Closure|array $headers = [];
 
@@ -37,7 +37,7 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    public function emptyLabel(string|Closure $label = null): static
+    public function emptyLabel(bool|string|Closure $label = null): static
     {
         $this->emptyLabel = $label;
 
@@ -74,7 +74,7 @@ class TableRepeater extends Repeater
         return $components;
     }
 
-    public function getEmptyLabel(): ?string
+    public function getEmptyLabel(): bool|string|null
     {
         return $this->evaluate($this->emptyLabel);
     }
