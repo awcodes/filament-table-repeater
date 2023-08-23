@@ -92,12 +92,20 @@ class TableRepeater extends Repeater
 
             $key = method_exists($field, 'getName') ? $field->getName() : $field->getId();
 
+            $isRequired = false;
+
+            if (property_exists($field, 'isRequired') && is_bool($field->isRequired)) {
+                $isRequired = $field->isRequired;
+
+                if (property_exists($field, 'isMarkedAsRequired')) {
+                    $isRequired = $field->isRequired && $field->isMarkedAsRequired;
+                }
+            }
+
             $item = [
                 'label' => $customHeaders[$key] ?? $field->getLabel(),
                 'width' => $this->getColumnWidths()[$key] ?? null,
-                'required' => property_exists($field, 'isRequired') && is_bool($field->isRequired)
-                    ? $field->isRequired
-                    : false,
+                'required' => $isRequired,
             ];
 
             $mergedHeaders[method_exists($field, 'getName') ? $field->getName() : $field->getId()] = $item;
