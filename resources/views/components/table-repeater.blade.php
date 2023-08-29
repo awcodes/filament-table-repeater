@@ -169,8 +169,8 @@
                                 </tr>
                             @endforeach
                         @else
-                            <tr class="filament-table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
-                                <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column p-4 w-px text-center italic">
+                            <tr class="filament-table-repeater-row filament-table-repeater-empty-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
+                                <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column filament-table-repeater-empty-column p-4 w-px text-center italic">
                                     {{ $emptyLabel ?: __('filament-table-repeater::components.repeater.empty.label') }}
                                 </td>
                             </tr>
