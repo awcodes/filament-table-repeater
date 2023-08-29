@@ -34,7 +34,7 @@ content: [
 
 ## Usage
 
-This field has most of the same functionality of the [Filament Forms Repeater](https://filamentphp.com/docs/2.x/forms/fields#repeater) field. The main exception is that this field can not be collapsed.
+This field has most of the same functionality of the [Filament Forms Repeater](https://filamentphp.com/docs/3.x/forms/fields/repeater) field. The main exception is that this field can not be collapsed.
 
 ```php
 TableRepeater::make('social')
