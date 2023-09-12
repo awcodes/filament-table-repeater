@@ -91,13 +91,12 @@ class TableRepeater extends Repeater
             $key = method_exists($field, 'getName') ? $field->getName() : $field->getId();
 
             $isRequired = false;
-
-            $reflector = new \ReflectionClass($field);
-            if ($reflector->hasProperty('isRequired') && $reflector->getProperty('isRequired')->isPublic() && is_bool($field->isRequired)) {
-                $isRequired = $field->isRequired;
+            
+            if (property_exists($field, 'isRequired') && is_bool($field->isRequired())) {
+                $isRequired = $field->isRequired();
 
                 if (property_exists($field, 'isMarkedAsRequired')) {
-                    $isRequired = $field->isRequired && $field->isMarkedAsRequired;
+                    $isRequired = $field->isRequired() && $field->isMarkedAsRequired;
                 }
             }
 
