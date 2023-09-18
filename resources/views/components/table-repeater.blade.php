@@ -23,6 +23,7 @@
     @endphp
 
     <div
+        x-data="{}"
         {{ $attributes->merge($getExtraAttributes())->class([
             'filament-table-repeater-component space-y-6 relative',
             match ($breakPoint) {
