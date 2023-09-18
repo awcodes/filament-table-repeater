@@ -110,6 +110,7 @@
                         @if (count($containers))
                             @foreach ($containers as $uuid => $row)
                                 <tr
+                                    wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                     x-sortable-item="{{ $uuid }}"
                                     class="filament-table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
                                 >
