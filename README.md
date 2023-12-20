@@ -40,14 +40,14 @@ This field has most of the same functionality of the [Filament Forms Repeater](h
 TableRepeater::make('social')
     ->schema([
         Select::make('platform')
-            ->disableLabel()
+            ->hiddenLabel()
             ->options([
                 'facebook' => 'Facebook',
                 'twitter' => 'Twitter',
                 'instagram' => 'Instagram'
             ]),
         TextInput::make('handle')
-            ->disableLabel(),
+            ->hiddenLabel(),
     ])
     ->columnSpan('full')
 ```
