@@ -19,6 +19,8 @@
 
         $emptyLabel = $getEmptyLabel();
 
+        $headersTextAlignment = $getHeadersTextAlignment();
+
         $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction->isVisible() || $moveDownAction->isVisible();
     @endphp
 
@@ -53,7 +55,7 @@
                             @foreach ($headers as $key => $header)
                                 <th
                                     @class([
-                                        'filament-table-repeater-header-column px-3 py-2 font-medium text-left bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
+                                        "filament-table-repeater-header-column px-3 py-2 font-medium text-{$headersTextAlignment} bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60",
                                         'ltr:rounded-tl-xl rtl:rounded-tr-xl' => $loop->first,
                                         'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $loop->last && ! $hasActions,
                                     ])
