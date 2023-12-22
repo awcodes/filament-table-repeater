@@ -59,11 +59,11 @@ TableRepeater::make('social')
     ->headers(['Platform', 'Handle'])
 ```
 
-To change the headers text alignment use the `headersTextAlignment('center')` method.
+To change the headers alignment use the `alignHeaders('center')` method.
 
 ```php
 TableRepeater::make('social')
-    ->headersTextAlignment('center')
+    ->alignHeaders('center')
 ```
 
 ### Labels

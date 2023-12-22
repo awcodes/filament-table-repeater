@@ -21,7 +21,7 @@ class TableRepeater extends Repeater
 
     protected bool|Closure $withoutHeader = false;
 
-    protected string|Closure $headersTextAlignment = "left";
+    protected string|Closure|null $headersAlignment = null;
 
     public function breakPoint(string $breakPoint = 'md'): static
     {
@@ -44,9 +44,9 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    public function headersTextAlignment(string|Closure $alignment = 'left'): static
+    public function alignHeaders(string|Closure $alignment = 'left'): static
     {
-        $this->headersTextAlignment = $alignment;
+        $this->headersAlignment = $alignment;
 
         return $this;
     }
@@ -86,9 +86,9 @@ class TableRepeater extends Repeater
         return $this->evaluate($this->emptyLabel);
     }
 
-    public function getHeadersTextAlignment(): string
+    public function getHeadersAlignment(): string
     {
-        return $this->evaluate($this->headersTextAlignment);
+        return $this->evaluate($this->headersAlignment) ?? 'left';
     }
 
     public function getHeaders(): array
