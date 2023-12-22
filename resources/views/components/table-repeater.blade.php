@@ -71,7 +71,7 @@
                             @endforeach
                             @if ($hasActions)
                                 <th class="filament-table-repeater-header-column w-px ltr:rounded-tr-xl rtl:rounded-tl-xl p-2 bg-gray-100 dark:bg-gray-900/60">
-                                    <div class="flex items-center md:justify-center">
+                                    <div class="flex items-center gap-2 md:justify-center">
                                         @if ($reorderAction->isVisible())
                                             <div class="w-8"></div>
                                         @endif
@@ -140,7 +140,7 @@
 
                                     @if ($hasActions)
                                         <td class="filament-table-repeater-column p-2 w-px">
-                                            <div class="flex items-center md:justify-center">
+                                            <div class="flex items-center gap-2 md:justify-center">
                                                 @if ($reorderAction->isVisible())
                                                     <div x-sortable-handle>
                                                         {{ $reorderAction }}
