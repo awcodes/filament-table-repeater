@@ -21,6 +21,8 @@ class TableRepeater extends Repeater
 
     protected bool|Closure $withoutHeader = false;
 
+    protected string|Closure|null $headersAlignment = null;
+
     public function breakPoint(string $breakPoint = 'md'): static
     {
         $this->breakPoint = $breakPoint;
@@ -38,6 +40,13 @@ class TableRepeater extends Repeater
     public function emptyLabel(bool|string|Closure $label = null): static
     {
         $this->emptyLabel = $label;
+
+        return $this;
+    }
+
+    public function alignHeaders(string|Closure $alignment = 'left'): static
+    {
+        $this->headersAlignment = $alignment;
 
         return $this;
     }
@@ -77,6 +86,11 @@ class TableRepeater extends Repeater
         return $this->evaluate($this->emptyLabel);
     }
 
+    public function getHeadersAlignment(): string
+    {
+        return $this->evaluate($this->headersAlignment) ?? 'left';
+    }
+
     public function getHeaders(): array
     {
         $mergedHeaders = [];
@@ -91,7 +105,7 @@ class TableRepeater extends Repeater
             $key = method_exists($field, 'getName') ? $field->getName() : $field->getId();
 
             $isRequired = false;
-            
+
             if (property_exists($field, 'isRequired') && is_bool($field->isRequired())) {
                 $isRequired = $field->isRequired();
 

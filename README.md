@@ -59,6 +59,13 @@ TableRepeater::make('social')
     ->headers(['Platform', 'Handle'])
 ```
 
+To change the headers alignment use the `alignHeaders('center')` method.
+
+```php
+TableRepeater::make('social')
+    ->alignHeaders('center')
+```
+
 ### Labels
 
 To automatically hide all the labels of the fields in the table use the `hideLabels()` method.
