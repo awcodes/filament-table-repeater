@@ -1,27 +1,36 @@
+@php
+    use Filament\Forms\Components\Actions\Action;
+    $containers = $getChildComponentContainers();
+
+    $addAction = $getAction($getAddActionName());
+    $cloneAction = $getAction($getCloneActionName());
+    $deleteAction = $getAction($getDeleteActionName());
+    $moveDownAction = $getAction($getMoveDownActionName());
+    $moveUpAction = $getAction($getMoveUpActionName());
+    $reorderAction = $getAction($getReorderActionName());
+    $isReorderableWithButtons = $isReorderableWithButtons();
+    $extraItemActions = $getExtraItemActions();
+
+    $headers = $getHeaders();
+    $columnWidths = $getColumnWidths();
+    $breakPoint = $getBreakPoint();
+    $hasContainers = count($containers) > 0;
+    $hasHiddenHeader = $shouldHideHeader();
+    $statePath = $getStatePath();
+
+    $emptyLabel = $getEmptyLabel();
+
+    $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction->isVisible() || $moveDownAction->isVisible() || count($visibleExtraItemActions);
+
+    foreach ($containers as $uuid => $row) {
+        $visibleExtraItemActions = array_filter(
+            $extraItemActions,
+            fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
+        );
+    }
+@endphp
+
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
-    @php
-        $containers = $getChildComponentContainers();
-
-        $addAction = $getAction($getAddActionName());
-        $cloneAction = $getAction($getCloneActionName());
-        $deleteAction = $getAction($getDeleteActionName());
-        $moveDownAction = $getAction($getMoveDownActionName());
-        $moveUpAction = $getAction($getMoveUpActionName());
-        $reorderAction = $getAction($getReorderActionName());
-        $isReorderableWithButtons = $isReorderableWithButtons();
-
-        $headers = $getHeaders();
-        $columnWidths = $getColumnWidths();
-        $breakPoint = $getBreakPoint();
-        $hasContainers = count($containers) > 0;
-        $hasHiddenHeader = $shouldHideHeader();
-        $statePath = $getStatePath();
-
-        $emptyLabel = $getEmptyLabel();
-
-        $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction->isVisible() || $moveDownAction->isVisible();
-    @endphp
-
     <div
         x-data="{}"
         {{ $attributes->merge($getExtraAttributes())->class([
@@ -36,7 +45,7 @@
         ]) }}
     >
         @if (count($containers) || $emptyLabel !== false)
-            <div @class([
+            <ul @class([
                 'filament-table-repeater-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20',
                 'sm:ring-gray-950/5 dark:sm:ring-white/20' => ! $hasContainers && $breakPoint === 'sm',
                 'md:ring-gray-950/5 dark:md:ring-white/20' => ! $hasContainers && $breakPoint === 'md',
@@ -77,6 +86,10 @@
                             @if ($hasActions)
                                 <th class="filament-table-repeater-header-column w-px ltr:rounded-tr-xl rtl:rounded-tl-xl p-2 bg-gray-100 dark:bg-gray-900/60">
                                     <div class="flex items-center gap-2 md:justify-center">
+                                        @foreach ($visibleExtraItemActions as $extraItemAction)
+                                            <div class="w-8"></div>
+                                        @endforeach
+
                                         @if ($reorderAction->isVisible())
                                             <div class="w-8"></div>
                                         @endif
@@ -114,6 +127,13 @@
                     >
                         @if (count($containers))
                             @foreach ($containers as $uuid => $row)
+                                @php
+                                    $itemLabel = $getItemLabel($uuid);
+                                    $visibleExtraItemActions = array_filter(
+                                        $extraItemActions,
+                                        fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
+                                    );
+                                @endphp
                                 <tr
                                     wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                     x-sortable-item="{{ $uuid }}"
@@ -145,31 +165,45 @@
 
                                     @if ($hasActions)
                                         <td class="filament-table-repeater-column p-2 w-px">
-                                            <div class="flex items-center gap-2 md:justify-center">
+                                            <ul class="flex items-center gap-x-3 lg:justify-center">
+                                                @foreach ($visibleExtraItemActions as $extraItemAction)
+                                                    <li>
+                                                        {{ $extraItemAction(['item' => $uuid]) }}
+                                                    </li>
+                                                @endforeach
+
                                                 @if ($reorderAction->isVisible())
-                                                    <div x-sortable-handle>
+                                                    <li x-sortable-handle class="shrink-0">
                                                         {{ $reorderAction }}
-                                                    </div>
+                                                    </li>
                                                 @endif
 
                                                 @if ($isReorderableWithButtons)
                                                     @if (! $loop->first)
+                                                        <li>
                                                         {{ $moveUpAction(['item' => $uuid]) }}
+                                                        </li>
                                                     @endif
 
                                                     @if (! $loop->last)
+                                                        <li>
                                                         {{ $moveDownAction(['item' => $uuid]) }}
+                                                        </li>
                                                     @endif
                                                 @endif
 
                                                 @if ($cloneAction->isVisible())
+                                                    <li>
                                                     {{ $cloneAction(['item' => $uuid]) }}
+                                                    </li>
                                                 @endif
 
                                                 @if ($deleteAction->isVisible())
+                                                    <li>
                                                     {{ $deleteAction(['item' => $uuid]) }}
+                                                    </li>
                                                 @endif
-                                            </div>
+                                            </ul>
                                         </td>
                                     @endif
 
