@@ -1,117 +1,117 @@
-.filament-table-repeater-component .choices input {
+.looper-component .choices input {
     min-width: 100% !important;
 }
 
-.filament-table-repeater-column.has-hidden-label .fi-fo-field-wrp > label {
+.looper-column.has-hidden-label .fi-fo-field-wrp > label {
     @apply not-sr-only text-sm !mb-2 block md:sr-only;
 }
 
 @media (max-width: 640px) {
-    .filament-table-repeater-component.break-point-sm table {
+    .looper-component.break-point-sm table {
         @apply block w-full;
     }
 
-    .filament-table-repeater-component.break-point-sm table thead,
-    .filament-table-repeater-component.break-point-sm table thead tr,
-    .filament-table-repeater-component.break-point-sm table thead th {
+    .looper-component.break-point-sm table thead,
+    .looper-component.break-point-sm table thead tr,
+    .looper-component.break-point-sm table thead th {
         @apply block !w-full sr-only;
     }
 
-    .filament-table-repeater-component.break-point-sm table tbody,
-    .filament-table-repeater-component.break-point-sm table tbody tr,
-    .filament-table-repeater-component.break-point-sm table tbody td {
+    .looper-component.break-point-sm table tbody,
+    .looper-component.break-point-sm table tbody tr,
+    .looper-component.break-point-sm table tbody td {
         @apply block !w-full;
     }
 
-    .filament-table-repeater-component.break-point-sm table tbody tr {
+    .looper-component.break-point-sm table tbody tr {
         @apply p-2;
     }
 }
 
 @media (max-width: 768px) {
-    .filament-table-repeater-component.break-point-md table {
+    .looper-component.break-point-md table {
         @apply block w-full;
     }
 
-    .filament-table-repeater-component.break-point-md table thead,
-    .filament-table-repeater-component.break-point-md table thead tr,
-    .filament-table-repeater-component.break-point-md table thead th {
+    .looper-component.break-point-md table thead,
+    .looper-component.break-point-md table thead tr,
+    .looper-component.break-point-md table thead th {
         @apply block !w-full sr-only;
     }
 
-    .filament-table-repeater-component.break-point-md table tbody,
-    .filament-table-repeater-component.break-point-md table tbody tr,
-    .filament-table-repeater-component.break-point-md table tbody td {
+    .looper-component.break-point-md table tbody,
+    .looper-component.break-point-md table tbody tr,
+    .looper-component.break-point-md table tbody td {
         @apply block !w-full;
     }
 
-    .filament-table-repeater-component.break-point-md table tbody tr {
+    .looper-component.break-point-md table tbody tr {
         @apply p-2;
     }
 }
 
 @media (max-width: 1024px) {
-    .filament-table-repeater-component.break-point-lg table {
+    .looper-component.break-point-lg table {
         @apply block w-full;
     }
 
-    .filament-table-repeater-component.break-point-lg table thead,
-    .filament-table-repeater-component.break-point-lg table thead tr,
-    .filament-table-repeater-component.break-point-lg table thead th {
+    .looper-component.break-point-lg table thead,
+    .looper-component.break-point-lg table thead tr,
+    .looper-component.break-point-lg table thead th {
         @apply block !w-full sr-only;
     }
 
-    .filament-table-repeater-component.break-point-lg table tbody,
-    .filament-table-repeater-component.break-point-lg table tbody tr,
-    .filament-table-repeater-component.break-point-lg table tbody td {
+    .looper-component.break-point-lg table tbody,
+    .looper-component.break-point-lg table tbody tr,
+    .looper-component.break-point-lg table tbody td {
         @apply block !w-full;
     }
 
-    .filament-table-repeater-component.break-point-lg table tbody tr {
+    .looper-component.break-point-lg table tbody tr {
         @apply p-2;
     }
 }
 
 @media (max-width: 1280px) {
-    .filament-table-repeater-component.break-point-xl table {
+    .looper-component.break-point-xl table {
         @apply block w-full;
     }
 
-    .filament-table-repeater-component.break-point-xl table thead,
-    .filament-table-repeater-component.break-point-xl table thead tr,
-    .filament-table-repeater-component.break-point-xl table thead th {
+    .looper-component.break-point-xl table thead,
+    .looper-component.break-point-xl table thead tr,
+    .looper-component.break-point-xl table thead th {
         @apply block !w-full sr-only;
     }
 
-    .filament-table-repeater-component.break-point-xl table tbody,
-    .filament-table-repeater-component.break-point-xl table tbody tr,
-    .filament-table-repeater-component.break-point-xl table tbody td {
+    .looper-component.break-point-xl table tbody,
+    .looper-component.break-point-xl table tbody tr,
+    .looper-component.break-point-xl table tbody td {
         @apply block !w-full;
     }
 
-    .filament-table-repeater-component.break-point-xl table tbody tr {
+    .looper-component.break-point-xl table tbody tr {
         @apply p-2;
     }
 }
 
 @media (max-width: 1536px) {
-    .filament-table-repeater-component.break-point-2xl table {
+    .looper-component.break-point-2xl table {
         @apply block w-full;
     }
 
-    .filament-table-repeater-component.break-point-2xl table thead,
-    .filament-table-repeater-component.break-point-2xl table thead tr,
-    .filament-table-repeater-component.break-point-2xl table thead th {
+    .looper-component.break-point-2xl table thead,
+    .looper-component.break-point-2xl table thead tr,
+    .looper-component.break-point-2xl table thead th {
         @apply block !w-full sr-only;
     }
 
-    .filament-table-repeater-component.break-point-2xl table tbody,
-    .filament-table-repeater-component.break-point-2xl table tbody tr,
-    .filament-table-repeater-component.break-point-2xl table tbody td {
+    .looper-component.break-point-2xl table tbody,
+    .looper-component.break-point-2xl table tbody tr,
+    .looper-component.break-point-2xl table tbody td {
         @apply block !w-full;
     }
 
-    .filament-table-repeater-component.break-point-2xl table tbody tr {
+    .looper-component.break-point-2xl table tbody tr {
         @apply p-2;
     }
 }

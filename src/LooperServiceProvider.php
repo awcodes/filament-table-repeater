@@ -1,15 +1,15 @@
 <?php
 
-namespace Awcodes\FilamentTableRepeater;
+namespace Awcodes\Looper;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentTableRepeaterServiceProvider extends PackageServiceProvider
+class LooperServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        $package->name('filament-table-repeater')
+        $package->name('looper')
             ->hasAssets()
             ->hasTranslations()
             ->hasViews();

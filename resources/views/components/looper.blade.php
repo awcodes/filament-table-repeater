@@ -42,7 +42,7 @@
     <div
         x-data="{}"
         {{ $attributes->merge($getExtraAttributes())->class([
-            'filament-table-repeater-component space-y-6 relative',
+            'looper-component space-y-6 relative',
             match ($breakPoint) {
                 'sm' => 'break-point-sm',
                 'lg' => 'break-point-lg',
@@ -54,7 +54,7 @@
     >
         @if (count($containers) || $emptyLabel !== false)
             <div @class([
-                'filament-table-repeater-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20',
+                'looper-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20',
                 'sm:ring-gray-950/5 dark:sm:ring-white/20' => ! $hasContainers && $breakPoint === 'sm',
                 'md:ring-gray-950/5 dark:md:ring-white/20' => ! $hasContainers && $breakPoint === 'md',
                 'lg:ring-gray-950/5 dark:lg:ring-white/20' => ! $hasContainers && $breakPoint === 'lg',
@@ -63,14 +63,14 @@
             ])>
                 <table class="w-full">
                     <thead @class([
-                        'filament-table-repeater-header-hidden sr-only' => $hasHiddenHeader,
-                        'filament-table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => ! $hasHiddenHeader,
+                        'looper-header-hidden sr-only' => $hasHiddenHeader,
+                        'looper-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => ! $hasHiddenHeader,
                     ])>
                         <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
                             @foreach ($headers as $key => $header)
                                 <th
                                     @class([
-                                        'filament-table-repeater-header-column px-3 py-2 font-medium  bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
+                                        'looper-header-column px-3 py-2 font-medium  bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
                                         'ltr:rounded-tl-xl rtl:rounded-tr-xl' => $loop->first,
                                         'ltr:rounded-tr-xl rtl:rounded-tl-xl' => $loop->last && ! $hasActions,
                                         match($getHeadersAlignment()) {
@@ -92,7 +92,7 @@
                                 </th>
                             @endforeach
                             @if ($hasActions)
-                                <th class="filament-table-repeater-header-column w-px ltr:rounded-tr-xl rtl:rounded-tl-xl p-2 bg-gray-100 dark:bg-gray-900/60">
+                                <th class="looper-header-column w-px ltr:rounded-tr-xl rtl:rounded-tl-xl p-2 bg-gray-100 dark:bg-gray-900/60">
                                     <div class="flex items-center gap-2 md:justify-center">
                                         @foreach ($visibleExtraItemActions as $extraItemAction)
                                             <div class="w-8"></div>
@@ -121,7 +121,7 @@
                                         @endif
 
                                         <span class="sr-only">
-                                            {{ __('filament-table-repeater::components.repeater.row_actions.label') }}
+                                            {{ trans('looper::components.repeater.row_actions.label') }}
                                         </span>
                                     </div>
                                 </th>
@@ -131,20 +131,20 @@
                     <tbody
                         x-sortable
                         wire:end.stop="{{ 'mountFormComponentAction(\'' . $statePath . '\', \'reorder\', { items: $event.target.sortable.toArray() })' }}"
-                        class="filament-table-repeater-rows-wrapper divide-y divide-gray-950/5 dark:divide-white/20"
+                        class="looper-rows-wrapper divide-y divide-gray-950/5 dark:divide-white/20"
                     >
                         @if (count($containers))
                             @foreach ($containers as $uuid => $row)
                                 <tr
                                     wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                     x-sortable-item="{{ $uuid }}"
-                                    class="filament-table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
+                                    class="looper-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
                                 >
                                     @foreach($row->getComponents() as $cell)
                                         @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
                                             <td
                                                 @class([
-                                                    'filament-table-repeater-column p-2',
+                                                    'looper-column p-2',
                                                     'has-hidden-label' => $cell->isLabelHidden(),
                                                 ])
                                                 @php
@@ -165,7 +165,7 @@
                                     @endforeach
 
                                     @if ($hasActions)
-                                        <td class="filament-table-repeater-column p-2 w-px">
+                                        <td class="looper-column p-2 w-px">
                                             <ul class="flex items-center gap-x-3 lg:justify-center">
                                                 @foreach ($visibleExtraItemActions as $extraItemAction)
                                                     <li>
@@ -211,9 +211,9 @@
                                 </tr>
                             @endforeach
                         @else
-                            <tr class="filament-table-repeater-row filament-table-repeater-empty-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
-                                <td colspan="{{ count($headers) + intval($hasActions) }}" class="filament-table-repeater-column filament-table-repeater-empty-column p-4 w-px text-center italic">
-                                    {{ $emptyLabel ?: __('filament-table-repeater::components.repeater.empty.label') }}
+                            <tr class="looper-row looper-empty-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
+                                <td colspan="{{ count($headers) + intval($hasActions) }}" class="looper-column looper-empty-column p-4 w-px text-center italic">
+                                    {{ $emptyLabel ?: trans('looper::components.repeater.empty.label') }}
                                 </td>
                             </tr>
                         @endif

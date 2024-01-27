@@ -1,13 +1,13 @@
 <?php
 
-namespace Awcodes\FilamentTableRepeater\Components;
+namespace Awcodes\Looper\Components;
 
 use Closure;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 
-class TableRepeater extends Repeater
+class Looper extends Repeater
 {
     protected string $breakPoint = 'md';
 
@@ -169,6 +169,6 @@ class TableRepeater extends Repeater
 
     public function getView(): string
     {
-        return 'filament-table-repeater::components.table-repeater';
+        return 'looper::components.looper';
     }
 }
