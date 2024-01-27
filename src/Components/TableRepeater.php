@@ -37,7 +37,7 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    public function emptyLabel(bool|string|Closure $label = null): static
+    public function emptyLabel(bool|string|Closure|null $label = null): static
     {
         $this->emptyLabel = $label;
 
@@ -98,6 +98,7 @@ class TableRepeater extends Repeater
         $customHeaders = $this->evaluate($this->headers);
 
         foreach ($this->getChildComponents() as $field) {
+
             if ($field instanceof Hidden || $field->isHidden()) {
                 continue;
             }
@@ -109,7 +110,7 @@ class TableRepeater extends Repeater
             if (property_exists($field, 'isRequired') && is_bool($field->isRequired())) {
                 $isRequired = $field->isRequired();
 
-                if (property_exists($field, 'isMarkedAsRequired')) {
+                if (property_exists($field, 'isMarkedAsRequired') && is_bool($field->isMarkedAsRequired)) {
                     $isRequired = $field->isRequired() && $field->isMarkedAsRequired;
                 }
             }
@@ -142,7 +143,7 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    protected function shouldShowLabels(): bool
+    public function shouldShowLabels(): bool
     {
         return $this->evaluate($this->showLabels);
     }

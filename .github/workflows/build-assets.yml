@@ -2,8 +2,14 @@ name: "Build Assets"
 
 on:
   pull_request:
+    branches:
+      - 2.x
     types:
       - closed
+    paths:
+      - 'resources/views/**.php'
+      - 'resources/js/**.js'
+      - 'resources/css/**.css'
 
 jobs:
   if_merged:
@@ -12,6 +18,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
