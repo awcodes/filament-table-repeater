@@ -1,5 +1,6 @@
 @php
     use Filament\Forms\Components\Actions\Action;
+
     $containers = $getChildComponentContainers();
 
     $addAction = $getAction($getAddActionName());
@@ -20,7 +21,7 @@
 
     $emptyLabel = $getEmptyLabel();
 
-    $hasActions = $reorderAction->isVisible() || $cloneAction->isVisible() || $deleteAction->isVisible() || $moveUpAction->isVisible() || $moveDownAction->isVisible() || count($visibleExtraItemActions);
+    $visibleExtraItemActions = [];
 
     foreach ($containers as $uuid => $row) {
         $visibleExtraItemActions = array_filter(
@@ -28,6 +29,13 @@
             fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
         );
     }
+
+    $hasActions = $reorderAction->isVisible()
+        || $cloneAction->isVisible()
+        || $deleteAction->isVisible()
+        || $moveUpAction->isVisible()
+        || $moveDownAction->isVisible()
+        || filled($visibleExtraItemActions);
 @endphp
 
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
@@ -45,7 +53,7 @@
         ]) }}
     >
         @if (count($containers) || $emptyLabel !== false)
-            <ul @class([
+            <div @class([
                 'filament-table-repeater-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20',
                 'sm:ring-gray-950/5 dark:sm:ring-white/20' => ! $hasContainers && $breakPoint === 'sm',
                 'md:ring-gray-950/5 dark:md:ring-white/20' => ! $hasContainers && $breakPoint === 'md',
@@ -55,7 +63,7 @@
             ])>
                 <table class="w-full">
                     <thead @class([
-                        'sr-only' => $hasHiddenHeader,
+                        'filament-table-repeater-header-hidden sr-only' => $hasHiddenHeader,
                         'filament-table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => ! $hasHiddenHeader,
                     ])>
                         <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
@@ -127,13 +135,6 @@
                     >
                         @if (count($containers))
                             @foreach ($containers as $uuid => $row)
-                                @php
-                                    $itemLabel = $getItemLabel($uuid);
-                                    $visibleExtraItemActions = array_filter(
-                                        $extraItemActions,
-                                        fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
-                                    );
-                                @endphp
                                 <tr
                                     wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                     x-sortable-item="{{ $uuid }}"

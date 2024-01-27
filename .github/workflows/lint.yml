@@ -2,17 +2,22 @@ name: "Fix PHP code styling"
 
 on:
   pull_request:
+    branches:
+      - 2.x
     types:
       - closed
+    paths:
+      - '**.php'
 
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Fix PHP code style issues
         uses: aglipanci/laravel-pint-action@2.3.1
