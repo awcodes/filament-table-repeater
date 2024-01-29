@@ -6,7 +6,7 @@
     @apply not-sr-only text-sm !mb-2 block md:sr-only;
 }
 
-@media (max-width: 640px) {
+@media (max-width: theme('screens.sm')) {
     .looper-component.break-point-sm table {
         @apply block w-full;
     }
@@ -28,7 +28,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: theme('screens.md')) {
     .looper-component.break-point-md table {
         @apply block w-full;
     }
@@ -50,7 +50,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: theme('screens.lg')) {
     .looper-component.break-point-lg table {
         @apply block w-full;
     }
@@ -72,7 +72,7 @@
     }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: theme('screens.xl')) {
     .looper-component.break-point-xl table {
         @apply block w-full;
     }
@@ -94,7 +94,7 @@
     }
 }
 
-@media (max-width: 1536px) {
+@media (max-width: theme('screens.2xl')) {
     .looper-component.break-point-2xl table {
         @apply block w-full;
     }
