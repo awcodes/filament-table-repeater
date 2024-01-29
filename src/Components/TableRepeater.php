@@ -67,16 +67,15 @@ class TableRepeater extends Repeater
 
         return $this;
     }
-
     public function getBreakPoint(): string
     {
         return $this->breakPoint;
     }
-
     public function getStrictWidth(): string
     {
         return $this->evaluate($this->strictWidth);
     }
+
     public function getScrollable(): string
     {
         return $this->evaluate($this->scrollable);
