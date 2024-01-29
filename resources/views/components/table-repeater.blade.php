@@ -155,7 +155,7 @@
                                                     $columnWidths &&
                                                     isset($columnWidths[$cellKey])
                                                 )
-                                                    style="width: {{ $columnWidths[$cellKey] }}"
+                                                    style="{{$strictWidth? 'min-width':'width'}}: {{ $columnWidths[$cellKey] }}"
                                                 @endif
                                             >
                                                 {{ $cell }}
