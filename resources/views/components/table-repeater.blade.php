@@ -81,7 +81,7 @@
                                         }
                                     ])
                                     @if ($header['width'])
-                                        style="{{$strict_width? 'min-width':'width'}}: {{ $header['width'] }}"
+                                        style="{{$strictWidth? 'min-width':'width'}}: {{ $header['width'] }}"
                                     @endif
                                 >
                                     {{ $header['label'] }}
