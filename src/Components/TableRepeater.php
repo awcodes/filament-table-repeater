@@ -34,13 +34,13 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    public function scrollable(bool $scrollable = true): static
+    public function scrollable(bool|string|Closure $scrollable = true): static
     {
         $this->scrollable = $scrollable;
 
         return $this;
     }
-    public function strictWidth(bool $strictWidth = true): static
+    public function strictWidth(bool|string|Closure $strictWidth = true): static
     {
         $this->strictWidth = $strictWidth;
 
@@ -71,6 +71,15 @@ class TableRepeater extends Repeater
     public function getBreakPoint(): string
     {
         return $this->breakPoint;
+    }
+
+    public function getStrictWidth(): string
+    {
+        return $this->evaluate($this->strictWidth);
+    }
+    public function getScrollable(): string
+    {
+        return $this->evaluate($this->scrollable);
     }
 
     public function getColumnWidths(): array
