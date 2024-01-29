@@ -40,6 +40,7 @@ class TableRepeater extends Repeater
 
         return $this;
     }
+
     public function strictWidth(bool|string|Closure $strictWidth = true): static
     {
         $this->strictWidth = $strictWidth;
