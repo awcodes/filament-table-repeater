@@ -49,7 +49,8 @@
                 'xl' => 'break-point-xl',
                 '2xl' => 'break-point-2xl',
                 default => 'break-point-md',
-            }
+            },
+            'overflow-auto' => $scrollable
         ]) }}
     >
         @if (count($containers) || $emptyLabel !== false)
@@ -80,7 +81,7 @@
                                         }
                                     ])
                                     @if ($header['width'])
-                                        style="width: {{ $header['width'] }}"
+                                        style="{{$strict_width? 'min-width':'width'}}: {{ $header['width'] }}"
                                     @endif
                                 >
                                     {{ $header['label'] }}

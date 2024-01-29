@@ -11,6 +11,10 @@ class TableRepeater extends Repeater
 {
     protected string $breakPoint = 'md';
 
+    protected bool $strictWidth = false;
+
+    protected bool $scrollable = false;
+
     protected array|Closure $columnWidths = [];
 
     protected null|bool|string|Closure $emptyLabel = null;
@@ -26,6 +30,19 @@ class TableRepeater extends Repeater
     public function breakPoint(string $breakPoint = 'md'): static
     {
         $this->breakPoint = $breakPoint;
+
+        return $this;
+    }
+
+    public function scrollable(bool $scrollable = true): static
+    {
+        $this->scrollable = $scrollable;
+
+        return $this;
+    }
+    public function strictWidth(bool $strictWidth = true): static
+    {
+        $this->strictWidth = $strictWidth;
 
         return $this;
     }
