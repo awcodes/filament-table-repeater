@@ -115,6 +115,17 @@ TableRepeater::make('social')
     ])
 ```
 
+### Strict Width
+
+Normally, setting a column width in a table adapts it to fit within the remaining 
+table space. If you want precise control and prevent stretching or shrinking, 
+use the `strictWidth()` method to enforce that specific width.
+
+```php
+TableRepeater::make('social')
+    ->strictWidth() // accepts Closure
+```
+
 ### Break Point
 
 Below a specific break point the table will render as a set of panels to 
@@ -124,6 +135,18 @@ can be overridden with the `breakPoint()` method.
 ```php
 TableRepeater::make('social')
     ->breakPoint('sm') // accepts Tailwind CSS screen sizes
+```
+
+### Scrolling
+
+For tables exceeding available space, enable both scrolling and fixed column widths. 
+Use `scrollable()` to activate horizontal scrolling, and complement it with `strictWidth()` 
+to prevent unwanted stretching or shrinking of columns.
+
+```php
+TableRepeater::make('social')
+    ->scrollable() // accepts Closure
+    ->strictWidth() // accepts Closure
 ```
 
 ## Changelog
