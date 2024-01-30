@@ -50,7 +50,7 @@
                 '2xl' => 'break-point-2xl',
                 default => 'break-point-md',
             },
-            'overflow-auto' => $getScrollable()
+            'overflow-auto' => $shouldBeScrollable()
         ]) }}
     >
         @if (count($containers) || $emptyLabel !== false)
@@ -81,7 +81,7 @@
                                         }
                                     ])
                                     @if ($header['width'])
-                                        style="{{$getStrictWidth()? 'min-width':'width'}}: {{ $header['width'] }}"
+                                        style="{{$shouldStrictWidth()? 'min-width':'width'}}: {{ $header['width'] }}"
                                     @endif
                                 >
                                     {{ $header['label'] }}
@@ -155,7 +155,7 @@
                                                     $columnWidths &&
                                                     isset($columnWidths[$cellKey])
                                                 )
-                                                    style="{{$getStrictWidth()? 'min-width':'width'}}: {{ $columnWidths[$cellKey] }}"
+                                                    style="{{$shouldStrictWidth()? 'min-width':'width'}}: {{ $columnWidths[$cellKey] }}"
                                                 @endif
                                             >
                                                 {{ $cell }}
