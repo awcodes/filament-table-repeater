@@ -167,7 +167,7 @@ class TableRepeater extends Repeater
         return $this;
     }
 
-    public function getView(): string
+    public function getDefaultView(): string
     {
         return 'filament-table-repeater::components.table-repeater';
     }
