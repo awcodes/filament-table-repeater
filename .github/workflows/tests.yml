@@ -5,7 +5,7 @@ on:
     types:
       - opened
     branches:
-      - 2.x
+      - 3.x
     paths:
       - '**.php'
       - '.github/workflows/run-tests.yml'
