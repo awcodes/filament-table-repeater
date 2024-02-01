@@ -56,7 +56,7 @@ By default, Table Repeater will automatically create the table headers from your
 
 ```php
 TableRepeater::make('social')
-    ->headers(['Platform', 'Handle'])
+    ->headers(['platform' => 'Platform', 'handle' => 'Handle'])
 ```
 
 To change the headers alignment use the `alignHeaders('center')` method.
