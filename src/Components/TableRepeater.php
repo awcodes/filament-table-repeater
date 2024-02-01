@@ -1,18 +1,29 @@
 <?php
 
-namespace Awcodes\Looper\Components;
+namespace Awcodes\TableRepeater\Components;
 
 use Closure;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 
-class Looper extends Repeater
+class TableRepeater extends Repeater
 {
+    use Concerns\CanBeStreamlined;
     use Concerns\HasBreakPoints;
     use Concerns\HasEmptyLabel;
+    use Concerns\HasExtraActions;
     use Concerns\HasHeader;
 
     protected bool | Closure | null $showLabels = null;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->registerActions([
+            fn (TableRepeater $component): array => $component->getExtraActions()
+        ]);
+    }
 
     public function getChildComponents(): array
     {
@@ -48,6 +59,6 @@ class Looper extends Repeater
 
     public function getView(): string
     {
-        return 'looper::components.looper';
+        return 'table-repeater::components.table-repeater';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Awcodes\Looper\Components\Concerns;
+namespace Awcodes\TableRepeater\Components\Concerns;
 
 use Closure;
 
@@ -17,7 +17,7 @@ trait HasHeader
         return $this;
     }
 
-    public function header(bool | Closure $condition = true): static
+    public function renderHeader(bool | Closure $condition = true): static
     {
         $this->renderHeader = $condition;
 
@@ -31,6 +31,6 @@ trait HasHeader
 
     public function shouldRenderHeader(): bool
     {
-        return $this->evaluate($this->renderHeader);
+        return $this->evaluate($this->renderHeader) ?? true;
     }
 }

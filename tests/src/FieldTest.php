@@ -1,12 +1,12 @@
 <?php
 
-use Awcodes\Looper\Components\Looper;
+use Awcodes\Looper\Components\TableRepeater;
 use Awcodes\Looper\Tests\Fixtures\Livewire;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\TextInput;
 
 beforeEach(function () {
-    $this->field = (new Looper('table_repeater'))
+    $this->field = (new TableRepeater('table_repeater'))
         ->container(ComponentContainer::make(Livewire::make()));
 });
 

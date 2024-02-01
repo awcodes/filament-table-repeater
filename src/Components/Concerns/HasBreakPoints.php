@@ -1,24 +1,24 @@
 <?php
 
-namespace Awcodes\Looper\Components\Concerns;
+namespace Awcodes\TableRepeater\Components\Concerns;
 
 use Closure;
 use Filament\Support\Enums\MaxWidth;
 
 trait HasBreakPoints
 {
-    protected string | MaxWidth | Closure | null $breakPoint = null;
+    protected string | MaxWidth | Closure | null $stackAt = null;
 
-    public function breakPoint(string | MaxWidth | Closure $breakPoint): static
+    public function stackAt(string | MaxWidth | Closure $stackAt): static
     {
-        $this->breakPoint = $breakPoint;
+        $this->stackAt = $stackAt;
 
         return $this;
     }
 
-    public function getBreakPoint(): string | MaxWidth
+    public function getStackAt(): string | MaxWidth
     {
-        return $this->evaluate($this->breakPoint)
+        return $this->evaluate($this->stackAt)
             ?? MaxWidth::Medium;
     }
 }

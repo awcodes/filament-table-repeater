@@ -13,12 +13,16 @@
     $reorderAction = $getAction($getReorderActionName());
     $isReorderableWithButtons = $isReorderableWithButtons();
     $extraItemActions = $getExtraItemActions();
+    $extraActions = $getExtraActions();
     $visibleExtraItemActions = [];
+    $visibleExtraActions = [];
 
     $headers = $getHeaders();
-    $breakPoint = $getBreakPoint();
+    $renderHeader = $shouldRenderHeader();
+    $stackAt = $getStackAt();
     $hasContainers = count($containers) > 0;
     $emptyLabel = $getEmptyLabel();
+    $streamlined = $isStreamlined();
 
     $statePath = $getStatePath();
 
@@ -26,6 +30,13 @@
         $visibleExtraItemActions = array_filter(
             $extraItemActions,
             fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
+        );
+    }
+
+    foreach ($extraActions as $extraAction) {
+        $visibleExtraActions = array_filter(
+            $extraActions,
+            fn (Action $action): bool => $action->isVisible(),
         );
     }
 
@@ -41,8 +52,9 @@
     <div
         x-data="{}"
         {{ $attributes->merge($getExtraAttributes())->class([
-            'looper-component space-y-6 relative',
-            match ($breakPoint) {
+            'table-repeater-component space-y-6 relative',
+            'streamlined' => $streamlined,
+            match ($stackAt) {
                 'sm', MaxWidth::Small => 'break-point-sm',
                 'lg', MaxWidth::Large => 'break-point-lg',
                 'xl', MaxWidth::ExtraLarge => 'break-point-xl',
@@ -52,17 +64,17 @@
         ]) }}
     >
         @if (count($containers) || $emptyLabel !== false)
-            <div class="looper-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20">
+            <div class="table-repeater-container rounded-xl relative ring-1 ring-gray-950/5 dark:ring-white/20">
                 <table class="w-full">
                     <thead @class([
-                        'looper-header-hidden sr-only' => empty($headers),
-                        'looper-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => filled($headers),
+                        'table-repeater-header-hidden sr-only' => ! $renderHeader,
+                        'table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => $renderHeader,
                     ])>
                     <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
-                                    'looper-header-column p-2 font-medium first:rounded-tl-xl last:rounded-tr-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
+                                    'table-repeater-header-column p-2 font-medium first:rounded-tl-xl last:rounded-tr-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
                                     match($header->getAlignment()) {
                                       'center', Alignment::Center => 'text-center',
                                       'right', 'end', Alignment::Right, Alignment::End => 'text-end',
@@ -80,9 +92,9 @@
                             </th>
                         @endforeach
                         @if ($hasActions && count($containers))
-                            <th class="looper-header-column w-px last:rounded-tr-xl p-2 bg-gray-100 dark:bg-gray-900/60">
+                            <th class="table-repeater-header-column w-px last:rounded-tr-xl p-2 bg-gray-100 dark:bg-gray-900/60">
                                 <span class="sr-only">
-                                    {{ trans('looper::components.repeater.row_actions.label') }}
+                                    {{ trans('table-repeater::components.repeater.row_actions.label') }}
                                 </span>
                             </th>
                         @endif
@@ -91,21 +103,27 @@
                     <tbody
                         x-sortable
                         wire:end.stop="{{ 'mountFormComponentAction(\'' . $statePath . '\', \'reorder\', { items: $event.target.sortable.toArray() })' }}"
-                        class="looper-rows-wrapper divide-y divide-gray-950/5 dark:divide-white/20"
+                        class="table-repeater-rows-wrapper divide-y divide-gray-950/5 dark:divide-white/20"
                     >
                     @if (count($containers))
                         @foreach ($containers as $uuid => $row)
                             <tr
                                 wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                 x-sortable-item="{{ $uuid }}"
-                                class="looper-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
+                                class="table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
                             >
-                                @foreach($row->getComponents() as $cell)
+                                @foreach($row->getComponents() as $k => $cell)
                                     @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
                                         <td
                                             @class([
-                                                'looper-column p-2',
+                                                'table-repeater-column',
+                                                'p-2' => ! $streamlined,
                                                 'has-hidden-label' => $cell->isLabelHidden(),
+                                                match($headers[$k]->getAlignment()) {
+                                                  'center', Alignment::Center => 'text-center',
+                                                  'right', 'end', Alignment::Right, Alignment::End => 'text-end',
+                                                  default => 'text-start'
+                                                }
                                             ])
                                             style="width: {{ $cell->getMaxWidth() ?? 'auto' }}"
                                         >
@@ -117,7 +135,7 @@
                                 @endforeach
 
                                 @if ($hasActions)
-                                    <td class="looper-column p-2 w-px">
+                                    <td class="table-repeater-column p-2 w-px">
                                         <ul class="flex items-center gap-x-3 lg:justify-center px-2">
                                             @foreach ($visibleExtraItemActions as $extraItemAction)
                                                 <li>
@@ -162,10 +180,10 @@
                             </tr>
                         @endforeach
                     @else
-                        <tr class="looper-row looper-empty-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
+                        <tr class="table-repeater-row table-repeater-empty-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
                             <td colspan="{{ count($headers) + intval($hasActions) }}"
-                                class="looper-column looper-empty-column p-4 w-px text-center italic">
-                                {{ $emptyLabel ?: trans('looper::components.repeater.empty.label') }}
+                                class="table-repeater-column table-repeater-empty-column p-4 w-px text-center italic">
+                                {{ $emptyLabel ?: trans('table-repeater::components.repeater.empty.label') }}
                             </td>
                         </tr>
                     @endif
@@ -174,10 +192,21 @@
             </div>
         @endif
 
-        @if ($addAction->isVisible())
-            <div class="relative flex justify-center">
-                {{ $addAction }}
-            </div>
-        @endif
+        @if ($addAction->isVisible() || filled($visibleExtraActions))
+            <ul class="relative flex gap-4 justify-center">
+                @if ($addAction->isVisible())
+                    <li>
+                        {{ $addAction }}
+                    </li>
+                @endif
+                @if (filled($visibleExtraActions))
+                    @foreach ($visibleExtraActions as $extraAction)
+                        <li>
+                            {{ ($extraAction) }}
+                        </li>
+                    @endforeach
+                @endif
+            </ul>
+         @endif
     </div>
 </x-dynamic-component>

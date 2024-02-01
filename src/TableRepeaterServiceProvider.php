@@ -1,15 +1,15 @@
 <?php
 
-namespace Awcodes\Looper;
+namespace Awcodes\TableRepeater;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LooperServiceProvider extends PackageServiceProvider
+class TableRepeaterServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        $package->name('looper')
+        $package->name('table-repeater')
             ->hasAssets()
             ->hasTranslations()
             ->hasViews();

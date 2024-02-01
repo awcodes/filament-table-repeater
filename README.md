@@ -5,6 +5,12 @@
 
 ![table-repeater-og](https://res.cloudinary.com/aw-codes/image/upload/w_1200,f_auto,q_auto/plugins/table-repeater/awcodes-table-repeater.jpg)
 
+## Upgrade Guide for 2.x to 3.x
+
+1. Rename you use statements from `Awcodes\FilamentTableRepeater` to `Awcodes\TableRepeater`.
+2. Run `npm run build` to update your theme file.
+3. See [Headers](#headers) for changes to the `headers()` method.
+
 ## Installation
 
 You can install the package via composer:
@@ -15,7 +21,7 @@ composer require awcodes/filament-table-repeater
 
 In an effort to align with Filament's theming methodology you will need to use a custom theme to use this plugin.
 
-> **Note**
+> [!IMPORTANT]
 > If you have not set up a custom theme and are using a Panel follow the instructions in the [Filament Docs](https://filamentphp.com/docs/3.x/panels/themes#creating-a-custom-theme) first. The following applies to both the Panels Package and the standalone Forms package.
 
 1. Import the plugin's stylesheet in your theme's css file.
@@ -37,42 +43,83 @@ content: [
 This field has most of the same functionality of the [Filament Forms Repeater](https://filamentphp.com/docs/3.x/forms/fields/repeater) field. The main exception is that this field can not be collapsed.
 
 ```php
-TableRepeater::make('social')
+use Awcodes\TableRepeater\Components\TableRepeater;
+use Awcodes\TableRepeater\Header;
+
+TableRepeater::make('users')
+     ->headers([
+        Header::make('name')->width('150px'),
+    ])
     ->schema([
-        Select::make('platform')
-            ->hiddenLabel()
-            ->options([
-                'facebook' => 'Facebook',
-                'twitter' => 'Twitter',
-                'instagram' => 'Instagram'
-            ]),
-        TextInput::make('handle')
-            ->hiddenLabel(),
+        ...
     ])
     ->columnSpan('full')
 ```
 
-By default, Table Repeater will automatically create the table headers from your schema labels. This can be overridden by simply passing an array of your desired headers to the `headers()` method.
+### Headers
+
+To add headers use the `headers()` method. and pass in an array of `Header` components.
 
 ```php
-TableRepeater::make('social')
-    ->headers(['Platform', 'Handle'])
+use Awcodes\TableRepeater\Header;
+
+TableRepeater::make('users')
+    >headers([
+        Header::make('name'),
+        Header::make('email'),
+    ])
 ```
 
-To change the headers alignment use the `alignHeaders('center')` method.
+#### Header Alignment
+
+To align the headers of the table use the `align()` method, passing in one of the Filament Alignment enums.
 
 ```php
-TableRepeater::make('social')
-    ->alignHeaders('center')
+use Filament\Support\Enums\Alignment;
+
+TableRepeater::make('users')
+    ->align(Alignment::Center)
+```
+
+#### Header Width
+
+To set the width of the headers of the table use the `width()` method.
+
+```php
+use Filament\Support\Enums\Alignment;
+
+TableRepeater::make('users')
+    ->width('150px')
+```
+
+#### Marking Columns as Required
+
+To mark a column as required use the `markAsRequired()` method.
+
+```php
+use Filament\Support\Enums\Alignment;
+
+TableRepeater::make('users')
+    ->markAsRequired()
+```
+
+#### Hiding the header
+
+Even if you do not want to show a header, you should still add them to be compliant with accessibility standards. You can hide the header though with the `renderHeader()` method.
+
+```php
+TableRepeater::make('users')
+    ->headers(...)
+    ->renderHeader(false)
 ```
 
 ### Labels
 
-To automatically hide all the labels of the fields in the table use the `hideLabels()` method.
+By default, form component labels will be set to hidden. To show them use the `showLabels()` method.
 
 ```php
-TableRepeater::make('social')
-    ->hideLabels()
+TableRepeater::make('users')
+    ->showLabels()
 ```
 
 ### Empty State Label
@@ -80,40 +127,11 @@ TableRepeater::make('social')
 To customize the text shown when the table is empty, use the `emptyLabel()` method.
 
 ```php
-TableRepeater::make('social')
-    ->emptyLabel('There is no platform registered.')
+TableRepeater::make('users')
+    ->emptyLabel('There are no users registered.')
 ```
 
 Alternatively, you can hide the empty label with `emptyLabel(false)`.
-
-### Without Header
-
-Sometimes we don't want to have the table header at all. To achieve this, use the `withoutHeader()` method.
-
-```php
-TableRepeater::make('social')
-    ->withoutHeader()
-```
-
-### Column Widths
-
-To set the width of columns in the table use the `columnWidths()` method. 
-Widths should be set in px as a string. For fields that don't have names, such as `Actions` and `Group`, you have to give it an explicit id to target. 
-
-```php
-TableRepeater::make('social')
-    ->columnWidths([
-        'platform' => '200px',
-        'action_field' => '100px',
-    ])
-    ->schema([
-        Select::make('platform'), // will be 200px wide
-        TextInput::make('handle'), // will be default stretched width
-        Actions::make([
-            ...
-        ])->id('action_field'), // will be 100px wide
-    ])
-```
 
 ### Break Point
 
@@ -122,8 +140,37 @@ make working with data easier on mobile devices. The default is 'md', but
 can be overridden with the `breakPoint()` method.
 
 ```php
-TableRepeater::make('social')
-    ->breakPoint('sm') // accepts Tailwind CSS screen sizes
+use Filament\Support\Enums\MaxWidth;
+
+TableRepeater::make('users')
+    ->stackAt(MaxWidth::Medium)
+```
+
+### Appearance
+
+If you prefer for the fields to be more inline with the table. You can change the appearance of the table with the `streamlined()` method.
+
+```php
+TableRepeater::make('users')
+    ->streamlined()
+```
+
+### Extra Actions
+
+TableRepeater supports the same `extraItemActions()` as the native Filament repeater. You may also add extra actions below the table with the `extraActions()` method. These will appear next to the 'Add' button or in place of the 'Add' button if it is hidden.
+
+```php
+TableRepeater::make('users')
+    ->extraActions([
+        Action::make('exportData')
+            ->icon('heroicon-m-inbox-arrow-down')
+            ->action(function (TableRepeater $component): void {
+                Notification::make('export_data')
+                    ->success()
+                    ->title('Data exported.')
+                    ->send();
+            }),
+    ])
 ```
 
 ## Changelog

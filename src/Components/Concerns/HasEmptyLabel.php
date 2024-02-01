@@ -1,6 +1,6 @@
 <?php
 
-namespace Awcodes\Looper\Components\Concerns;
+namespace Awcodes\TableRepeater\Components\Concerns;
 
 use Closure;
 

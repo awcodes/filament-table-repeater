@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Awcodes\\Looper\\": "src"
+            "Awcodes\\TableRepeater\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Awcodes\\Looper\\Tests\\": "tests/src",
-            "Awcodes\\Looper\\Tests\\Database\\Factories\\": "tests/database/factories"
+            "Awcodes\\TableRepeater\\Tests\\": "tests/src",
+            "Awcodes\\TableRepeater\\Tests\\Database\\Factories\\": "tests/database/factories"
         }
     },
     "scripts": {
@@ -59,7 +59,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Awcodes\\Looper\\LooperServiceProvider"
+                "Awcodes\\TableRepeater\\TableRepeaterServiceProvider"
             ]
         }
     },

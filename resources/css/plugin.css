@@ -1,118 +1,178 @@
-.looper-component .choices input {
+.table-repeater-component .choices input {
     min-width: 100% !important;
 }
 
-.looper-column.has-hidden-label .fi-fo-field-wrp > label {
+.table-repeater-column.has-hidden-label .fi-fo-field-wrp > label {
     @apply not-sr-only text-sm !mb-2 block md:sr-only;
 }
 
+@media (min-width: theme('screens.sm')) {
+    .table-repeater-component.break-point-sm.streamlined {
+        .fi-input-wrp,
+        .fi-fo-file-upload .filepond--root {
+            @apply ring-0 bg-transparent shadow-none;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-checkbox-list),
+        .fi-fo-field-wrp:has(.fi-fo-radio) {
+            @apply py-2 px-3;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-toggle) {
+            @apply inline-block mt-1;
+        }
+    }
+}
+
+@media (min-width: theme('screens.md')) {
+    .table-repeater-component.break-point-md.streamlined {
+        .fi-input-wrp,
+        .fi-fo-file-upload .filepond--root {
+            @apply ring-0 bg-transparent shadow-none;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-checkbox-list),
+        .fi-fo-field-wrp:has(.fi-fo-radio) {
+            @apply py-2 px-3;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-toggle) {
+            @apply inline-block mt-1;
+        }
+    }
+}
+
+@media (min-width: theme('screens.lg')) {
+    .table-repeater-component.break-point-lg.streamlined {
+        .fi-input-wrp,
+        .fi-fo-file-upload .filepond--root {
+            @apply ring-0 bg-transparent shadow-none;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-checkbox-list),
+        .fi-fo-field-wrp:has(.fi-fo-radio) {
+            @apply py-2 px-3;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-toggle) {
+            @apply inline-block mt-1;
+        }
+    }
+}
+
+@media (min-width: theme('screens.xl')) {
+    .table-repeater-component.break-point-xl.streamlined {
+        .fi-input-wrp,
+        .fi-fo-file-upload .filepond--root {
+            @apply ring-0 bg-transparent shadow-none;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-checkbox-list),
+        .fi-fo-field-wrp:has(.fi-fo-radio) {
+            @apply py-2 px-3;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-toggle) {
+            @apply inline-block mt-1;
+        }
+    }
+}
+
+@media (min-width: theme('screens.2xl')) {
+    .table-repeater-component.break-point-2xl.streamlined {
+        .fi-input-wrp,
+        .fi-fo-file-upload .filepond--root {
+            @apply ring-0 bg-transparent shadow-none;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-checkbox-list),
+        .fi-fo-field-wrp:has(.fi-fo-radio) {
+            @apply py-2 px-3;
+        }
+
+        .fi-fo-field-wrp:has(.fi-fo-toggle) {
+            @apply inline-block mt-1;
+        }
+    }
+}
+
 @media (max-width: theme('screens.sm')) {
-    .looper-component.break-point-sm table {
+    .table-repeater-component.break-point-sm table {
         @apply block w-full;
-    }
 
-    .looper-component.break-point-sm table thead,
-    .looper-component.break-point-sm table thead tr,
-    .looper-component.break-point-sm table thead th {
-        @apply block !w-full sr-only;
-    }
+        thead { @apply sr-only; }
 
-    .looper-component.break-point-sm table tbody,
-    .looper-component.break-point-sm table tbody tr,
-    .looper-component.break-point-sm table tbody td {
-        @apply block !w-full;
-    }
+        :is(tbody, th, td) { @apply block !w-full; }
 
-    .looper-component.break-point-sm table tbody tr {
-        @apply p-2;
+        label { @apply text-start; }
+
+        tr { @apply p-4 !w-full flex flex-col gap-6; }
+
+        tr td:last-of-type ul { @apply px-0; }
     }
 }
 
 @media (max-width: theme('screens.md')) {
-    .looper-component.break-point-md table {
+    .table-repeater-component.break-point-md table {
         @apply block w-full;
-    }
 
-    .looper-component.break-point-md table thead,
-    .looper-component.break-point-md table thead tr,
-    .looper-component.break-point-md table thead th {
-        @apply block !w-full sr-only;
-    }
+        thead { @apply sr-only; }
 
-    .looper-component.break-point-md table tbody,
-    .looper-component.break-point-md table tbody tr,
-    .looper-component.break-point-md table tbody td {
-        @apply block !w-full;
-    }
+        :is(tbody, th, td) { @apply block !w-full; }
 
-    .looper-component.break-point-md table tbody tr {
-        @apply p-2;
+        label { @apply text-start; }
+
+        tr { @apply p-4 !w-full flex flex-col gap-6; }
+
+        tr td:last-of-type ul { @apply px-0; }
     }
 }
 
 @media (max-width: theme('screens.lg')) {
-    .looper-component.break-point-lg table {
+    .table-repeater-component.break-point-lg table {
         @apply block w-full;
-    }
 
-    .looper-component.break-point-lg table thead,
-    .looper-component.break-point-lg table thead tr,
-    .looper-component.break-point-lg table thead th {
-        @apply block !w-full sr-only;
-    }
+        thead { @apply sr-only; }
 
-    .looper-component.break-point-lg table tbody,
-    .looper-component.break-point-lg table tbody tr,
-    .looper-component.break-point-lg table tbody td {
-        @apply block !w-full;
-    }
+        :is(tbody, th, td) { @apply block !w-full; }
 
-    .looper-component.break-point-lg table tbody tr {
-        @apply p-2;
+        label { @apply text-start; }
+
+        tr { @apply p-4 !w-full flex flex-col gap-6; }
+
+        tr td:last-of-type ul { @apply px-0; }
     }
 }
 
 @media (max-width: theme('screens.xl')) {
-    .looper-component.break-point-xl table {
+    .table-repeater-component.break-point-xl table {
         @apply block w-full;
-    }
 
-    .looper-component.break-point-xl table thead,
-    .looper-component.break-point-xl table thead tr,
-    .looper-component.break-point-xl table thead th {
-        @apply block !w-full sr-only;
-    }
+        thead { @apply sr-only; }
 
-    .looper-component.break-point-xl table tbody,
-    .looper-component.break-point-xl table tbody tr,
-    .looper-component.break-point-xl table tbody td {
-        @apply block !w-full;
-    }
+        :is(tbody, th, td) { @apply block !w-full; }
 
-    .looper-component.break-point-xl table tbody tr {
-        @apply p-2;
+        label { @apply text-start; }
+
+        tr { @apply p-4 !w-full flex flex-col gap-6; }
+
+        tr td:last-of-type ul { @apply px-0; }
     }
 }
 
 @media (max-width: theme('screens.2xl')) {
-    .looper-component.break-point-2xl table {
+    .table-repeater-component.break-point-2xl table {
         @apply block w-full;
-    }
 
-    .looper-component.break-point-2xl table thead,
-    .looper-component.break-point-2xl table thead tr,
-    .looper-component.break-point-2xl table thead th {
-        @apply block !w-full sr-only;
-    }
+        thead { @apply sr-only; }
 
-    .looper-component.break-point-2xl table tbody,
-    .looper-component.break-point-2xl table tbody tr,
-    .looper-component.break-point-2xl table tbody td {
-        @apply block !w-full;
-    }
+        :is(tbody, th, td) { @apply block !w-full; }
 
-    .looper-component.break-point-2xl table tbody tr {
-        @apply p-2;
+        label { @apply text-start; }
+
+        tr { @apply p-4 !w-full flex flex-col gap-6; }
+
+        tr td:last-of-type ul { @apply px-0; }
     }
 }
 

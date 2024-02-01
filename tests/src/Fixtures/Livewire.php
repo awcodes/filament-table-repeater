@@ -2,7 +2,7 @@
 
 namespace Awcodes\Looper\Tests\Fixtures;
 
-use Awcodes\Looper\Components\Looper;
+use Awcodes\Looper\Components\TableRepeater;
 use Awcodes\Looper\Tests\Models\Page;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -70,7 +70,7 @@ class Livewire extends Component implements HasForms
     public static function getFullFormSchema(): array
     {
         return [
-            Looper::make('table_repeater')
+            TableRepeater::make('table_repeater')
                 ->schema(static::getRepeaterFormSchema()),
         ];
     }

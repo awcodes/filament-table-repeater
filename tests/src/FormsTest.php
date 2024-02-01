@@ -1,6 +1,6 @@
 <?php
 
-use Awcodes\Looper\Components\Looper;
+use Awcodes\Looper\Components\TableRepeater;
 use Awcodes\Looper\Tests\Fixtures\Livewire as LivewireForm;
 use function Pest\Livewire\livewire;
 
@@ -106,7 +106,7 @@ class DisabledHeaderRow extends LivewireForm
     public static function getFullFormSchema(): array
     {
         return [
-            Looper::make('table_repeater')
+            TableRepeater::make('table_repeater')
                 ->withoutHeader()
                 ->schema(static::getRepeaterFormSchema()),
         ];
@@ -118,7 +118,7 @@ class DefaultItemsForm extends LivewireForm
     public static function getFullFormSchema(): array
     {
         return [
-            Looper::make('table_repeater')
+            TableRepeater::make('table_repeater')
                 ->defaultItems(0)
                 ->schema(static::getRepeaterFormSchema()),
         ];
@@ -130,7 +130,7 @@ class HiddenLabelsForm extends LivewireForm
     public static function getFullFormSchema(): array
     {
         return [
-            Looper::make('table_repeater')
+            TableRepeater::make('table_repeater')
                 ->hideLabels()
                 ->schema(static::getRepeaterFormSchema()),
         ];
