@@ -1,8 +1,8 @@
 <?php
 
-namespace Awcodes\Looper\Tests;
+namespace Awcodes\TableRepeater\Tests;
 
-use Awcodes\Looper\LooperServiceProvider;
+use Awcodes\TableRepeater\TableRepeaterServiceProvider;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
@@ -31,7 +31,7 @@ class TestCase extends Orchestra
             LivewireServiceProvider::class,
             NotificationsServiceProvider::class,
             SupportServiceProvider::class,
-            LooperServiceProvider::class,
+            TableRepeaterServiceProvider::class,
         ];
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Awcodes\Looper\Tests\Models;
+namespace Awcodes\TableRepeater\Tests\Models;
 
-use Awcodes\Looper\Tests\Database\Factories\PageFactory;
+use Awcodes\TableRepeater\Tests\Database\Factories\PageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

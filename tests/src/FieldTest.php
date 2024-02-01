@@ -1,9 +1,11 @@
 <?php
 
-use Awcodes\Looper\Components\TableRepeater;
-use Awcodes\Looper\Tests\Fixtures\Livewire;
+use Awcodes\TableRepeater\Components\TableRepeater;
+use Awcodes\TableRepeater\Header;
+use Awcodes\TableRepeater\Tests\Fixtures\Livewire;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Enums\Alignment;
 
 beforeEach(function () {
     $this->field = (new TableRepeater('table_repeater'))
@@ -11,61 +13,11 @@ beforeEach(function () {
 });
 
 it('has headers by default', function () {
+    $header = Header::make('Name');
+
     $this->field
-        ->schema([
-            TextInput::make('name'),
-        ]);
-
-    expect($this->field->getHeaders())
-        ->toBeArray()
-        ->toEqual([
-            'name' => [
-                'label' => 'Name',
-                'width' => null,
-                'required' => false,
-            ],
-        ]);
-});
-
-it('has headers with default items 0', function () {
-    $this->field
-        ->defaultItems(0)
-        ->schema([
-            TextInput::make('name'),
-        ]);
-
-    expect($this->field->getHeaders())
-        ->toBeArray()
-        ->toEqual([
-            'name' => [
-                'label' => 'Name',
-                'width' => null,
-                'required' => false,
-            ],
-        ]);
-});
-
-it('has headers with required', function () {
-    $this->field
-        ->schema([
-            TextInput::make('name')->required(),
-        ]);
-
-    expect($this->field->getHeaders())
-        ->toBeArray()
-        ->toEqual([
-            'name' => [
-                'label' => 'Name',
-                'width' => null,
-                'required' => true,
-            ],
-        ]);
-});
-
-it('respects header widths', function () {
-    $this->field
-        ->columnWidths([
-            'name' => '100px',
+        ->headers([
+            $header,
         ])
         ->schema([
             TextInput::make('name'),
@@ -73,31 +25,84 @@ it('respects header widths', function () {
 
     expect($this->field->getHeaders())
         ->toBeArray()
-        ->toEqual([
-            'name' => [
-                'label' => 'Name',
-                'width' => '100px',
-                'required' => false,
-            ],
+        ->toContain($header);
+});
+
+it('has headers with default items 0', function () {
+    $header = Header::make('Name');
+
+    $this->field
+        ->defaultItems(0)
+        ->headers([
+            $header,
+        ])
+        ->schema([
+            TextInput::make('name'),
         ]);
+
+    expect($this->field->getHeaders())
+        ->toBeArray()
+        ->toContain($header);
+});
+
+it('respects header widths', function () {
+    $header = Header::make('Name')->width('150px');
+
+    $this->field
+        ->headers([
+            $header,
+        ])
+        ->schema([
+            TextInput::make('name'),
+        ]);
+
+    expect($this->field->getHeaders())
+        ->toBeArray()
+        ->toContain($header)
+        ->and($header->getWidth())->toEqual('150px');
+});
+
+it('respects header alignment', function () {
+    $header = Header::make('Name')->align(Alignment::Center);
+
+    $this->field
+        ->headers([
+            $header,
+        ])
+        ->schema([
+            TextInput::make('name'),
+        ]);
+
+    expect($this->field->getHeaders())
+        ->toBeArray()
+        ->toContain($header)
+        ->and($header->getAlignment())->toEqual(Alignment::Center);
 });
 
 it('can hide header', function () {
+    $header = Header::make('Name');
+
     $this->field
-        ->withoutHeader()
+        ->headers([
+            $header,
+        ])
+        ->renderHeader(false)
         ->schema([
             TextInput::make('name'),
         ]);
 
-    expect($this->field->shouldHideHeader())->toBeTrue();
+    expect($this->field->getHeaders())
+        ->toBeArray()
+        ->toContain($header)
+        ->and($this->field->shouldRenderHeader())->toBeFalse();
 });
 
-it('hides field labels', function () {
+it('shows field labels', function () {
     $this->field
-        ->hideLabels()
+        ->showLabels()
         ->schema([
             TextInput::make('name'),
         ]);
 
-    expect($this->field->shouldShowLabels())->toBeFalse();
+    expect($this->field->shouldShowLabels())->toBeTrue();
 });

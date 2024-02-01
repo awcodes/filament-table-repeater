@@ -1,5 +1,5 @@
 <?php
 
-use Awcodes\Looper\Tests\TestCase;
+use Awcodes\TableRepeater\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

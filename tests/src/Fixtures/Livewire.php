@@ -1,9 +1,10 @@
 <?php
 
-namespace Awcodes\Looper\Tests\Fixtures;
+namespace Awcodes\TableRepeater\Tests\Fixtures;
 
-use Awcodes\Looper\Components\TableRepeater;
-use Awcodes\Looper\Tests\Models\Page;
+use Awcodes\TableRepeater\Components\TableRepeater;
+use Awcodes\TableRepeater\Header;
+use Awcodes\TableRepeater\Tests\Models\Page;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -71,7 +72,15 @@ class Livewire extends Component implements HasForms
     {
         return [
             TableRepeater::make('table_repeater')
+                ->headers(static::getRepeaterHeaders())
                 ->schema(static::getRepeaterFormSchema()),
+        ];
+    }
+
+    public static function getRepeaterHeaders(): array
+    {
+        return [
+            Header::make('name'),
         ];
     }
 

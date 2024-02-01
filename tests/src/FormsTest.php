@@ -1,29 +1,29 @@
 <?php
 
-use Awcodes\Looper\Components\TableRepeater;
-use Awcodes\Looper\Tests\Fixtures\Livewire as LivewireForm;
+use Awcodes\TableRepeater\Components\TableRepeater;
+use Awcodes\TableRepeater\Tests\Fixtures\Livewire as LivewireForm;
 use function Pest\Livewire\livewire;
 
 it('renders editor field', function () {
     livewire(LivewireForm::class)
         ->assertFormFieldExists('table_repeater')
-        ->assertDontSee('looper-header-hidden')
-        ->assertDontSee('looper-empty-row');
+        ->assertDontSee('table-repeater-header-hidden')
+        ->assertDontSee('table-repeater-empty-row');
 });
 
 it('can disable header row', function () {
     livewire(DisabledHeaderRow::class)
-        ->assertSee('looper-header-hidden');
+        ->assertSee('table-repeater-header-hidden');
 });
 
 it('can have 0 items by default', function () {
     livewire(DefaultItemsForm::class)
-        ->assertSee('looper-empty-row');
+        ->assertSee('table-repeater-empty-row');
 });
 
-it('can hide labels', function () {
-    livewire(HiddenLabelsForm::class)
-        ->assertSee('has-hidden-label');
+it('can show labels', function () {
+    livewire(VisibleLabelsForm::class)
+        ->assertDontSee('has-hidden-label');
 });
 
 //it('creates record', function() {
@@ -107,7 +107,8 @@ class DisabledHeaderRow extends LivewireForm
     {
         return [
             TableRepeater::make('table_repeater')
-                ->withoutHeader()
+                ->renderHeader(false)
+                ->headers(static::getRepeaterHeaders())
                 ->schema(static::getRepeaterFormSchema()),
         ];
     }
@@ -120,18 +121,20 @@ class DefaultItemsForm extends LivewireForm
         return [
             TableRepeater::make('table_repeater')
                 ->defaultItems(0)
+                ->headers(static::getRepeaterHeaders())
                 ->schema(static::getRepeaterFormSchema()),
         ];
     }
 }
 
-class HiddenLabelsForm extends LivewireForm
+class VisibleLabelsForm extends LivewireForm
 {
     public static function getFullFormSchema(): array
     {
         return [
             TableRepeater::make('table_repeater')
-                ->hideLabels()
+                ->showLabels()
+                ->headers(static::getRepeaterHeaders())
                 ->schema(static::getRepeaterFormSchema()),
         ];
     }

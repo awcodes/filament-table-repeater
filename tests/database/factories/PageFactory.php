@@ -1,8 +1,8 @@
 <?php
 
-namespace Awcodes\Looper\Tests\Database\Factories;
+namespace Awcodes\TableRepeater\Tests\Database\Factories;
 
-use Awcodes\Looper\Tests\Models\Page;
+use Awcodes\TableRepeater\Tests\Models\Page;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PageFactory extends Factory
