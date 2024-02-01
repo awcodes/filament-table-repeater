@@ -137,7 +137,7 @@ Alternatively, you can hide the empty label with `emptyLabel(false)`.
 
 Below a specific break point the table will render as a set of panels to 
 make working with data easier on mobile devices. The default is 'md', but 
-can be overridden with the `breakPoint()` method.
+can be overridden with the `stackAt()` method.
 
 ```php
 use Filament\Support\Enums\MaxWidth;
