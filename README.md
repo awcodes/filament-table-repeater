@@ -64,7 +64,7 @@ To add headers use the `headers()` method. and pass in an array of `Header` comp
 use Awcodes\TableRepeater\Header;
 
 TableRepeater::make('users')
-    >headers([
+    ->headers([
         Header::make('name'),
         Header::make('email'),
     ])
