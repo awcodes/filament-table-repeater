@@ -112,7 +112,7 @@
                                 x-sortable-item="{{ $uuid }}"
                                 class="table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
                             >
-                                @php($conter = 0)
+                                @php($counter = 0)
                                 @foreach($row->getComponents() as $k => $cell)
                                     @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
                                         <td
