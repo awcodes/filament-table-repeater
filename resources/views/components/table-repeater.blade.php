@@ -110,7 +110,7 @@
                             <tr
                                 wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                 x-sortable-item="{{ $uuid }}"
-                                class="table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
+                                class="table-repeater-row"
                             >
                                 @php($counter = 0)
                                 @foreach($row->getComponents() as $cell)
@@ -137,7 +137,7 @@
 
                                 @if ($hasActions)
                                     <td class="table-repeater-column p-2 w-px">
-                                        <ul class="flex items-center gap-x-3 lg:justify-center px-2">
+                                        <ul class="flex items-center table-repeater-row-actions gap-x-3 px-2">
                                             @foreach ($visibleExtraItemActions as $extraItemAction)
                                                 <li>
                                                     {{ $extraItemAction(['item' => $uuid]) }}
@@ -181,7 +181,7 @@
                             </tr>
                         @endforeach
                     @else
-                        <tr class="table-repeater-row table-repeater-empty-row md:divide-x md:divide-gray-950/5 dark:md:divide-divide-white/20">
+                        <tr class="table-repeater-row table-repeater-empty-row">
                             <td colspan="{{ count($headers) + intval($hasActions) }}"
                                 class="table-repeater-column table-repeater-empty-column p-4 w-px text-center italic">
                                 {{ $emptyLabel ?: trans('table-repeater::components.repeater.empty.label') }}
@@ -208,6 +208,6 @@
                     @endforeach
                 @endif
             </ul>
-         @endif
+        @endif
     </div>
 </x-dynamic-component>
