@@ -113,8 +113,10 @@
                                 class="table-repeater-row md:divide-x md:divide-gray-950/5 dark:md:divide-white/20"
                             >
                                 @php($counter = 0)
-                                @foreach($row->getComponents() as $k => $cell)
-                                    @if(! $cell instanceof \Filament\Forms\Components\Hidden && ! $cell->isHidden())
+                                @foreach($row->getComponents() as $cell)
+                                    @if($cell instanceof \Filament\Forms\Components\Hidden || $cell->isHidden())
+                                        {{ $cell }}
+                                    @else
                                         <td
                                             @class([
                                                 'table-repeater-column',
@@ -130,8 +132,6 @@
                                         >
                                             {{ $cell }}
                                         </td>
-                                    @else
-                                        {{ $cell }}
                                     @endif
                                 @endforeach
 
