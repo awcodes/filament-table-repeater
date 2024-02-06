@@ -77,7 +77,7 @@ To align the headers of the table use the `align()` method, passing in one of th
 ```php
 use Filament\Support\Enums\Alignment;
 
-TableRepeater::make('users')
+Header::make('name')
     ->align(Alignment::Center)
 ```
 
@@ -86,9 +86,7 @@ TableRepeater::make('users')
 To set the width of the headers of the table use the `width()` method.
 
 ```php
-use Filament\Support\Enums\Alignment;
-
-TableRepeater::make('users')
+Header::make('name')
     ->width('150px')
 ```
 
@@ -97,9 +95,7 @@ TableRepeater::make('users')
 To mark a column as required use the `markAsRequired()` method.
 
 ```php
-use Filament\Support\Enums\Alignment;
-
-TableRepeater::make('users')
+Header::make('name')
     ->markAsRequired()
 ```
 
