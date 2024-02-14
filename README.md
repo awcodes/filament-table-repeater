@@ -27,7 +27,7 @@ In an effort to align with Filament's theming methodology you will need to use a
 1. Import the plugin's stylesheet in your theme's css file.
 
 ```css
-@import '<path-to-vendor>/vendor/awcodes/filament-table-repeater/resources/css/plugin.css';
+@import '<path-to-vendor>/awcodes/filament-table-repeater/resources/css/plugin.css';
 ```
 
 2. Add the plugin's views to your `tailwind.config.js` file.
