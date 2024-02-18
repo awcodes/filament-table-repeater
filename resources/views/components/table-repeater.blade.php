@@ -26,6 +26,13 @@
 
     $statePath = $getStatePath();
 
+    foreach ($containers as $uuid => $row) {
+        $visibleExtraItemActions = array_filter(
+            $extraItemActions,
+            fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
+        );
+    }
+
     foreach ($extraActions as $extraAction) {
         $visibleExtraActions = array_filter(
             $extraActions,
@@ -100,12 +107,6 @@
                     >
                     @if (count($containers))
                         @foreach ($containers as $uuid => $row)
-                            @php
-                                $visibleExtraItemActions = array_filter(
-                                    $extraItemActions,
-                                    fn (Action $action): bool => $action(['item' => $uuid])->isVisible(),
-                                );
-                            @endphp
                             <tr
                                 wire:key="{{ $this->getId() }}.{{ $row->getStatePath() }}.{{ $field::class }}.item"
                                 x-sortable-item="{{ $uuid }}"
