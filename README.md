@@ -47,7 +47,7 @@ use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 
 TableRepeater::make('users')
-     ->headers([
+     ->headers([ // optional
         Header::make('name')->width('150px'),
     ])
     ->schema([
@@ -58,7 +58,7 @@ TableRepeater::make('users')
 
 ### Headers
 
-To add headers use the `headers()` method. and pass in an array of `Header` components.
+To have more control over the headers, use the `headers()` method. and pass in an array of `Header` components.
 
 ```php
 use Awcodes\TableRepeater\Header;
@@ -101,7 +101,7 @@ Header::make('name')
 
 #### Hiding the header
 
-Even if you do not want to show a header, you should still add them to be compliant with accessibility standards. You can hide the header though with the `renderHeader()` method.
+If you do not want to show the headers, you can override them though `renderHeader()` method.
 
 ```php
 TableRepeater::make('users')
