@@ -30,16 +30,15 @@ trait HasHeader
         $headers = $this->evaluate($this->headers) ?? [];
         $fields = $this->childComponents;
 
-        if (count($headers) < count($fields)) {
-            foreach($fields as $field) {
-                $headers[] = Header::make($field->getLabel());
+        foreach ($fields as $index => $field) {
+            if (!isset($headers[$index]) || !is_string($headers[$index])) {
+                $headers[$index] = Header::make($field->getLabel());
+            } else {
+                $headers[$index] = Header::make($headers[$index]);
             }
         }
 
-        return array_map(
-            fn ($header) => $header instanceof Header ? $header : Header::make($header),
-            $headers,
-        );
+        return $headers;
     }
 
     public function shouldRenderHeader(): bool
