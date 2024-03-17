@@ -28,14 +28,13 @@ trait HasHeader
     public function getHeaders(): array
     {
         $headers = $this->evaluate($this->headers) ?? [];
-        $fields = $this->childComponents;
 
-        foreach ($fields as $index => $field) {
-            if (!isset($headers[$index]) || !is_string($headers[$index])) {
+        foreach ($this->getChildComponents() as $index => $field) {
+            if (!isset($headers[$index])) {
                 $headers[$index] = Header::make($field->getLabel());
-            } else {
-                $headers[$index] = Header::make($headers[$index]);
-            }
+            } elseif (!($headers[$index] instanceof Header)) {
+                $headers[$index] = Header::make($headers[$index] ?? $field->getLabel());
+            };
         }
 
         return $headers;
