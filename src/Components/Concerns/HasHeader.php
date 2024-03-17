@@ -2,6 +2,7 @@
 
 namespace Awcodes\TableRepeater\Components\Concerns;
 
+use Awcodes\TableRepeater\Header;
 use Closure;
 
 trait HasHeader
@@ -26,7 +27,17 @@ trait HasHeader
 
     public function getHeaders(): array
     {
-        return $this->evaluate($this->headers) ?? [];
+        $headers = $this->evaluate($this->headers) ?? [];
+
+        foreach ($this->getChildComponents() as $index => $field) {
+            if (!isset($headers[$index])) {
+                $headers[$index] = Header::make($field->getLabel());
+            } elseif (!($headers[$index] instanceof Header)) {
+                $headers[$index] = Header::make($headers[$index] ?? $field->getLabel());
+            };
+        }
+
+        return $headers;
     }
 
     public function shouldRenderHeader(): bool
