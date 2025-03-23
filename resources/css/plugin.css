@@ -1,3 +1,7 @@
+.table-repeater-column {
+    vertical-align: top;
+}
+
 .table-repeater-component .choices input {
     min-width: 100% !important;
 }
