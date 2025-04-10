@@ -70,7 +70,7 @@
                         'table-repeater-header-hidden sr-only' => ! $renderHeader,
                         'table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => $renderHeader,
                     ])>
-                    <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
+                    <tr class="text-xs md:divide-x rtl:divide-x-reverse md:divide-gray-950/5 dark:md:divide-white/20">
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
