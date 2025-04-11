@@ -30,7 +30,7 @@
         }
 
         .table-repeater-row {
-            @apply divide-x divide-gray-950/5 dark:divide-white/20;
+            @apply divide-x rtl:divide-x-reverse divide-gray-950/5 dark:divide-white/20;
         }
 
         .table-repeater-row-actions {
@@ -59,7 +59,7 @@
         }
 
         .table-repeater-row {
-            @apply divide-x divide-gray-950/5 dark:divide-white/20;
+            @apply divide-x rtl:divide-x-reverse divide-gray-950/5 dark:divide-white/20;
         }
 
         .table-repeater-row-actions {
@@ -88,7 +88,7 @@
         }
 
         .table-repeater-row {
-            @apply divide-x divide-gray-950/5 dark:divide-white/20;
+            @apply divide-x rtl:divide-x-reverse divide-gray-950/5 dark:divide-white/20;
         }
 
         .table-repeater-row-actions {
@@ -117,7 +117,7 @@
         }
 
         .table-repeater-row {
-            @apply divide-x divide-gray-950/5 dark:divide-white/20;
+            @apply divide-x rtl:divide-x-reverse divide-gray-950/5 dark:divide-white/20;
         }
 
         .table-repeater-row-actions {
@@ -146,7 +146,7 @@
         }
 
         .table-repeater-row {
-            @apply divide-x divide-gray-950/5 dark:divide-white/20;
+            @apply divide-x rtl:divide-x-reverse divide-gray-950/5 dark:divide-white/20;
         }
 
         .table-repeater-row-actions {

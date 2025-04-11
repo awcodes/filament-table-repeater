@@ -70,11 +70,11 @@
                         'table-repeater-header-hidden sr-only' => ! $renderHeader,
                         'table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => $renderHeader,
                     ])>
-                    <tr class="text-xs md:divide-x md:divide-gray-950/5 dark:md:divide-white/20">
+                    <tr class="text-xs md:divide-x rtl:divide-x-reverse md:divide-gray-950/5 dark:md:divide-white/20">
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
-                                    'table-repeater-header-column p-2 font-medium first:rounded-tl-xl last:rounded-tr-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
+                                    'table-repeater-header-column p-2 font-medium first:rounded-tl-xl rtl:first:rounded-tr-xl rtl:first:rounded-tl-none last:rounded-tr-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
                                     match($header->getAlignment()) {
                                       'center', Alignment::Center => 'text-center',
                                       'right', 'end', Alignment::Right, Alignment::End => 'text-end',
@@ -92,7 +92,7 @@
                             </th>
                         @endforeach
                         @if ($hasActions && count($containers))
-                            <th class="table-repeater-header-column w-px last:rounded-tr-xl p-2 bg-gray-100 dark:bg-gray-900/60">
+                            <th class="table-repeater-header-column w-px last:rounded-tr-xl rtl:last:rounded-tr-none rtl:last:rounded-tl-xl p-2 bg-gray-100 dark:bg-gray-900/60">
                                 <span class="sr-only">
                                     {{ trans('table-repeater::components.repeater.row_actions.label') }}
                                 </span>
