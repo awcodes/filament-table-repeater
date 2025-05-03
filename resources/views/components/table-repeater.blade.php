@@ -125,7 +125,7 @@
                                     @else
                                         <td
                                             @class([
-                                                'table-repeater-column',
+                                                'table-repeater-column align-top',
                                                 'p-2' => ! $streamlined,
                                                 'has-hidden-label' => $cell->isLabelHidden(),
                                                 match($headers[$counter++]->getAlignment()) {
@@ -142,7 +142,7 @@
                                 @endforeach
 
                                 @if ($hasActions)
-                                    <td class="table-repeater-column p-2 w-px">
+                                    <td class="table-repeater-column p-2 w-px align-top">
                                         <ul class="flex items-center table-repeater-row-actions gap-x-3 px-2">
                                             @foreach ($visibleExtraItemActions as $extraItemAction)
                                                 <li>
