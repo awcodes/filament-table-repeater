@@ -74,7 +74,7 @@
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
-                                    'table-repeater-header-column p-2 font-medium first:rounded-tl-xl rtl:first:rounded-tr-xl rtl:first:rounded-tl-none last:rounded-tr-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
+                                    'table-repeater-header-column p-2 font-medium first:rounded-tl-xl rtl:first:rounded-tr-xl rtl:first:rounded-tl-none last:rounded-tr-xl rtl:last:rounded-tr-none rtl:last:rounded-tl-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
                                     match($header->getAlignment()) {
                                       'center', Alignment::Center => 'text-center',
                                       'right', 'end', Alignment::Right, Alignment::End => 'text-end',
