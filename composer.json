@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "filament/forms": "^3.2.116",
+        "filament/forms": "^4.0",
         "spatie/laravel-package-tools": "^1.13.5"
     },
     "require-dev": {
