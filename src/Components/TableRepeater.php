@@ -25,9 +25,9 @@ class TableRepeater extends Repeater
         ]);
     }
 
-    public function getChildComponents(): array
+    public function getChildComponents(?string $key = null): array
     {
-        $components = parent::getChildComponents();
+        $components = parent::getChildComponents($key);
 
         if ($this->shouldShowLabels()) {
             return $components;
