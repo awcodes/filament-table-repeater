@@ -1,7 +1,7 @@
 @php
     use Filament\Forms\Components\Actions\Action;
     use Filament\Support\Enums\Alignment;
-    use Filament\Support\Enums\MaxWidth;
+    use Filament\Support\Enums\Width;
 
     $containers = $getChildComponentContainers();
 
@@ -55,10 +55,10 @@
             'table-repeater-component space-y-6 relative',
             'streamlined' => $streamlined,
             match ($stackAt) {
-                'sm', MaxWidth::Small => 'break-point-sm',
-                'lg', MaxWidth::Large => 'break-point-lg',
-                'xl', MaxWidth::ExtraLarge => 'break-point-xl',
-                '2xl', MaxWidth::TwoExtraLarge => 'break-point-2xl',
+                'sm', Width::Small => 'break-point-sm',
+                'lg', Width::Large => 'break-point-lg',
+                'xl', Width::ExtraLarge => 'break-point-xl',
+                '2xl', Width::TwoExtraLarge => 'break-point-2xl',
                 default => 'break-point-md',
             }
         ]) }}

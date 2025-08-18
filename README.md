@@ -136,10 +136,10 @@ make working with data easier on mobile devices. The default is 'md', but
 can be overridden with the `stackAt()` method.
 
 ```php
-use Filament\Support\Enums\MaxWidth;
+use Filament\Support\Enums\Width;
 
 TableRepeater::make('users')
-    ->stackAt(MaxWidth::Medium)
+    ->stackAt(Width::Medium)
 ```
 
 ### Appearance
