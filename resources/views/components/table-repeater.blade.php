@@ -129,7 +129,7 @@
                                 @php($counter = 0)
                                 @if ($hasItemNumbers)
                                     <td @class([
-                                        'table-repeater-column align-top text-center',
+                                        'table-repeater-column text-center text-sm',
                                         'p-1' => !$streamlined,
                                     ])
                                         style="width:auto">
