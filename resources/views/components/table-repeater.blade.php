@@ -17,6 +17,7 @@
     $visibleExtraItemActions = [];
     $visibleExtraActions = [];
 
+    $hasItemNumbers = $hasItemNumbers();
     $headers = $getHeaders();
     $renderHeader = $shouldRenderHeader();
     $stackAt = $getStackAt();
@@ -71,6 +72,13 @@
                         'table-repeater-header rounded-t-xl overflow-hidden border-b border-gray-950/5 dark:border-white/20' => $renderHeader,
                     ])>
                     <tr class="text-xs md:divide-x rtl:divide-x-reverse md:divide-gray-950/5 dark:md:divide-white/20">
+                        @if ($hasItemNumbers)
+                            <th
+                                @class([
+                                    'table-repeater-header-column p-2 font-medium first:rounded-tl-xl rtl:first:rounded-tr-xl rtl:first:rounded-tl-none last:rounded-tr-xl rtl:last:rounded-tr-none rtl:last:rounded-tl-xl bg-gray-100 dark:text-gray-300 dark:bg-gray-900/60',
+                                ])
+                            >#</th>
+                        @endif
                         @foreach ($headers as $key => $header)
                             <th
                                 @class([
@@ -119,6 +127,15 @@
                                 class="table-repeater-row"
                             >
                                 @php($counter = 0)
+                                @if ($hasItemNumbers)
+                                    <td @class([
+                                        'table-repeater-column text-center text-sm',
+                                        'p-1' => !$streamlined,
+                                    ])
+                                        style="width:auto">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                @endif
                                 @foreach($row->getComponents() as $cell)
                                     @if($cell instanceof \Filament\Forms\Components\Hidden || $cell->isHidden())
                                         {{ $cell }}
