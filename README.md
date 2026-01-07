@@ -5,6 +5,11 @@
 
 <img src="https://res.cloudinary.com/aw-codes/image/upload/w_1200,f_auto,q_auto/plugins/table-repeater/awcodes-table-repeater.jpg" alt="table repeater opengraph image" width="1200" height="auto" class="filament-hidden" style="width: 100%;" />
 
+## Filament v4
+
+> [!NOTE]
+> In Filament v4, Table Repeaters are built into Core. For more information, see the [Filament documentation](https://filamentphp.com/docs/4.x/forms/repeater#table-repeaters).
+
 ## Upgrade Guide for 2.x to 3.x
 
 1. Rename you use statements from `Awcodes\FilamentTableRepeater` to `Awcodes\TableRepeater`.
