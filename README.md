@@ -1,3 +1,6 @@
+> [!Warning]
+> This package is deprecated. As of Filament v4 the native Repeater covers the use case of this package and it is not needed anymore.
+
 # Table Repeater Plugin
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/awcodes/filament-table-repeater.svg?style=flat-square)](https://packagist.org/packages/awcodes/filament-table-repeater)
