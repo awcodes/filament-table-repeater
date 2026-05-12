@@ -19,6 +19,8 @@
 2. Run `npm run build` to update your theme file.
 3. See [Headers](#headers) for changes to the `headers()` method.
 
+<!-- [docs_start] -->
+
 ## Installation
 
 You can install the package via composer:
@@ -176,6 +178,8 @@ TableRepeater::make('users')
             }),
     ])
 ```
+
+<!-- [docs_end] -->
 
 ## Changelog
 
